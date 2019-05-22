@@ -62,14 +62,15 @@
     "steal-less": "^1.2.2"
   },
   "devDependencies": {
+    "can-reflect": "^1.17.10",
+    "done-serve": "^3.0.0",
+    "donejs-cli": "^3.0.0-pre.5",
+    "generator-donejs": "^3.0.0",
     "jshint": "^2.9.1",
     "steal": "^2.1.6",
     "steal-qunit": "^1.0.1",
     "steal-tools": "^2.0.9",
-    "testee": "^0.8.1",
-    "generator-donejs": "^3.0.0",
-    "donejs-cli": "^3.0.0-pre.5",
-    "done-serve": "^3.0.0"
+    "testee": "^0.8.1"
   },
   "license": "MIT"
 }

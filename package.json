@@ -1,0 +1,75 @@
+{
+  "name": "can-define-object",
+  "version": "0.0.0",
+  "description": "The DefineObject",
+  "homepage": "https://github.com/canjs/can-define-object",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DoneJS/can-define-object.git"
+  },
+  "author": {
+    "name": "DoneJS Core Team",
+    "email": "core@donejs.com",
+    "url": "https://github.com/canjs/can-define-object"
+  },
+  "scripts": {
+    "preversion": "npm test && npm run build",
+    "version": "git commit -am \"Update version number\" && git checkout -b release && git add -f dist/",
+    "postpublish": "git push --tags && git checkout master && git branch -D release && git push",
+    "testee": "testee test.html --browsers firefox",
+    "test": "npm run jshint && npm run testee",
+    "jshint": "jshint ./*.js --config",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "build": "node build.js",
+    "develop": "done-serve --static --develop --port 8080"
+  },
+  "main": "dist/cjs/can-define-object",
+  "browser": {
+    "transform": [
+      "cssify"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "cssify"
+    ]
+  },
+  "keywords": [
+    "canjs",
+    "donejs-plugin"
+  ],
+  "steal": {
+    "main": "can-define-object",
+    "configDependencies": [
+      "live-reload"
+    ],
+    "npmIgnore": [
+      "testee",
+      "generator-donejs",
+      "donejs-cli",
+      "steal-tools"
+    ],
+    "plugins": [
+      "steal-less",
+      "steal-stache"
+    ]
+  },
+  "dependencies": {
+    "can-define-mixin": "^0.1.0",
+    "cssify": "^0.6.0",
+    "steal-less": "^1.2.2"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.1",
+    "steal": "^2.1.6",
+    "steal-qunit": "^1.0.1",
+    "steal-tools": "^2.0.9",
+    "testee": "^0.8.1",
+    "generator-donejs": "^3.0.0",
+    "donejs-cli": "^3.0.0-pre.5",
+    "done-serve": "^3.0.0"
+  },
+  "license": "MIT"
+}

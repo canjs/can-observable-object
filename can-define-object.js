@@ -9,7 +9,7 @@ const {
 
 let DefineObject = class extends mixinProxy(Object) {
 	constructor(props) {
-		super(props);
+		super();
 		mixins.finalizeClass(this.constructor);
 		mixins.initialize(this, props);
 	}

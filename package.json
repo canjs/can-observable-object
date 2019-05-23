@@ -36,7 +36,7 @@
     "main": "src/can-define-object.js"
   },
   "dependencies": {
-    "can-define-mixin": "^0.1.0",
+    "can-define-mixin": "^0.2.0",
     "cssify": "^0.6.0",
     "steal-less": "^1.2.2"
   },

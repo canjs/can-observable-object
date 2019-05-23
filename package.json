@@ -13,55 +13,37 @@
     "url": "https://github.com/canjs/can-define-object"
   },
   "scripts": {
+    "compile-to-es5": "babel src --out-dir dist",
     "preversion": "npm test && npm run build",
     "version": "git commit -am \"Update version number\" && git checkout -b release && git add -f dist/",
     "postpublish": "git push --tags && git checkout master && git branch -D release && git push",
     "testee": "testee test.html --browsers firefox",
     "test": "npm run jshint && npm run testee",
     "jshint": "jshint ./*.js --config",
+    "prepublishOnly": "npm run compile-to-es5",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "build": "node build.js",
     "develop": "done-serve --static --develop --port 8080"
   },
-  "main": "dist/cjs/can-define-object",
-  "browser": {
-    "transform": [
-      "cssify"
-    ]
-  },
-  "browserify": {
-    "transform": [
-      "cssify"
-    ]
-  },
+  "main": "dist/can-define-object.js",
   "keywords": [
     "canjs",
     "donejs-plugin"
   ],
   "steal": {
-    "main": "can-define-object",
-    "configDependencies": [
-      "live-reload"
-    ],
-    "npmIgnore": [
-      "testee",
-      "generator-donejs",
-      "donejs-cli",
-      "steal-tools"
-    ],
-    "plugins": [
-      "steal-less",
-      "steal-stache"
-    ]
+    "main": "src/can-define-object.js"
   },
   "dependencies": {
-    "can-define-mixin": "^0.1.0",
+    "can-define-mixin": "^0.2.0",
     "cssify": "^0.6.0",
     "steal-less": "^1.2.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "can-reflect": "^1.17.10",
     "done-serve": "^3.0.0",
     "donejs-cli": "^3.0.0-pre.5",
@@ -72,5 +54,6 @@
     "steal-tools": "^2.0.9",
     "testee": "^0.8.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "browserslist": "ie 11"
 }

@@ -1,4 +1,4 @@
-const DefineObject = require("./can-define-object");
+const DefineObject = require("./src/can-define-object");
 const QUnit = require("steal-qunit");
 const canReflect = require("can-reflect");
 
@@ -30,7 +30,7 @@ QUnit.test("Passing undefined props into DefineObject", function(assert) {
 
 QUnit.test("Passing undefined props into extended DefineObject", function(assert) {
 	class ExtendedDefineObject extends DefineObject {};
-	
+
 	let inst = new ExtendedDefineObject({ a: 'b' });
 	assert.equal(inst.a, "b", "passed them on");
 

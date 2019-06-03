@@ -8,7 +8,7 @@
 Specify default values using a [can-define-object/object.types.propDefinition] object.
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class RouteData extends DefineObject {
   static propertyDefaults = {
@@ -32,7 +32,7 @@ The above specifies a RouteData type whose properties default to a strictly type
 propertyDefaults can be specified using any of the methods specified by the [can-define-object/object.types.property property type].
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Person extends DefineObject {
   static propertyDefaults = String;

@@ -12,7 +12,7 @@ Defines whether the property is [enumerable](https://developer.mozilla.org/en-US
   from being serialized like:
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class MyMap extends DefineObject {
     static define = {
@@ -32,7 +32,7 @@ Defines whether the property is [enumerable](https://developer.mozilla.org/en-US
   Make a [can-define-object/define/get getter] property part of the serialized result like:
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class MyMap extends DefineObject {
     static define = {

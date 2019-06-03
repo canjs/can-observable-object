@@ -9,7 +9,7 @@ Specifies the default value for instances of the defined type.
   Any value can be provided as the default value used for this property, like:
 
   ```js
-  import { DefineObject } from "can/ecosystem"
+  import { DefineObject } from "can/everything"
 
   class Example extends DefineObject {
     static define = {
@@ -34,7 +34,7 @@ Specifies the default value for instances of the defined type.
 The following defaults `age` to `0` and `address` to an object:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Person extends DefineObject {
   static define = {

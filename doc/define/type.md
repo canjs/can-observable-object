@@ -12,7 +12,7 @@ Specify a type for the property.
   If the value provided for this property is of another type, or is `null` or `undefined`, it will throw.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static define = {
@@ -39,7 +39,7 @@ Specify a type for the property.
   If the value provided for this property is of another type, or is `null` or `undefined`, it will throw.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static define = {
@@ -66,7 +66,7 @@ Specify a type for the property.
   instances. For example here is an inline TypeObject:
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static define = {

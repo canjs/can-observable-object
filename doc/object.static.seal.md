@@ -6,7 +6,7 @@
 @option {Boolean} If `true`, in development, instances of this object will be [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal). In  [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) errors will be thrown when undefined properties are set. By default DefineObjects are not sealed.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static seal = true;
@@ -25,7 +25,7 @@
   If `false`, the object will not be sealed. This is the default behavior of DefineObjects.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   const person = new DefineObject();
   person.first = "Ada";

@@ -9,7 +9,7 @@ Returns the default value for instances of the defined type.  The default value 
   A getter that returns the default value used for this property, like:
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Example extends DefineObject {
     static define = {
@@ -37,7 +37,7 @@ Returns the default value for instances of the defined type.  The default value 
 The following defaults `age` to `0` and `address` to an object using the two default signatures:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Person extends DefineObject {
   static define = {

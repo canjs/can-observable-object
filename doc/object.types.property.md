@@ -4,7 +4,7 @@
 @type {PrimitiveValue} Specify a property with a default primitive value. Using this signature will result in strict type checking being applied to this property.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static define = {
@@ -22,7 +22,7 @@
 @type {PrimitiveConstructor} Specify a property by defining its type as a primitive constructor. This can be `String`, `Number`, or `Boolean`. Using this signature results in strict type checking for this property.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static define = {
@@ -44,7 +44,7 @@
   Specify a constructor function as a property's value will result in strict type checking for this property.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Occupation extends DefineObject {}
 
@@ -64,10 +64,10 @@
   ```
   @codepen
 
-@type {TypeObject} Specify a property as a special TypeObject. Most of the type you'll use this in conjunction with [can-type] to specify a type.
+@type {TypeObject} Specify a property as a special TypeObject. Most of the time you'll use this in conjunction with [can-type] to specify a type.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static define = {
@@ -104,7 +104,7 @@
 @type {Function} Specify a property as a function sets the property to `type: Function` and uses the provided function as the default value. A use-case for this signature is to have a [can-stache] renderer as a default template while allowing consumers of your component to provide an alternative renderer.
 
   ```js
-  import { DefineObject, stache } from "can/ecosystem";
+  import { DefineObject, stache } from "can/everything";
 
   // This is a function
   const headerView = stache(`
@@ -123,7 +123,7 @@
 @type {PropDefinition} Define a property through a [can-define.types.propDefinition]. This allows you define several different behaviors (as shown in the sidebar).
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static define = {

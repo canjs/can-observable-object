@@ -3,7 +3,7 @@
 
 @description
 
-Specify what happens when a certain property is read on a map. `get` functions
+Specify what happens when a certain property is read on an object. `get` functions
 are computed and automatically update themselves when a dependent
 observable value is changed.
 
@@ -50,7 +50,7 @@ Getter methods are useful for:
 Virtual properties are properties that don't actually store any value, but derive their value
 from some other properties on the map.
 
-Whenever a getter is provided, it is wrapped in a [can-compute], which ensures
+Whenever a getter is provided, it is wrapped in a [can-observation], which ensures
 that whenever its dependent properties change, a change event will fire for this property also.
 
 ```js
@@ -84,8 +84,8 @@ p.first = "Lincoln";
 A getter can be used to derive a value from a set value. A getter's
 `lastSetValue` argument is the last value set by `instance.propertyName = value`.
 
-For example, a property might be set to a compute, but when read, provides the value
-of the compute.
+For example, a property might be set to a observable, but when read, provides the value
+of the observable.
 
 ```js
 import { DefineObject, SimpleObservable, Reflect } from "can";

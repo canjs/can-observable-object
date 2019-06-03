@@ -4,7 +4,6 @@
 @group can-define-object/object.behaviors 0 behaviors
 @group can-define-object/object.static 1 static
 @group can-define-object/object.types 2 types
-@group can-define-object/object.other 3 other
 @alias can.DefineObject
 @templateRender true
 
@@ -14,10 +13,10 @@
 
   The `can-define-object` module exports the `DefineObject` class.
 
-  Calling `new DefineObject(props)` creates a new instance of DefineObject or an [can-define-object/object.extend extended] DefineObject. Then, `new DefineObject(props)` assigns every property on `props` to the new instance.  If props are passed that are not defined already, those properties are set on the instance.  If the instance should be sealed, it is sealed.
+  Calling `new DefineObject(props)` creates a new instance of DefineObject or an extended DefineObject. Then, `new DefineObject(props)` assigns every property on `props` to the new instance.  If props are passed that are not defined already, those properties are set on the instance.  If the instance should be sealed, it is sealed.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   const person = new DefineObject( {
 		first: "Justin",
@@ -46,7 +45,7 @@ Instances of `DefineObject` have all methods and properties from
 Example:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class MyType extends DefineObject {
   static define = {
@@ -77,7 +76,7 @@ Extended `DefineObject` classes have all methods and properties from
 Example:
 
 ```js
-import { DefineObject, Reflect as canReflect } from "can/ecosystem";
+import { DefineObject, Reflect as canReflect } from "can/everything";
 
 class MyType extends DefineObject {
   static define = {
@@ -102,7 +101,7 @@ behavior.
 For example, a `Todo` type, with a `name` property, `completed` property, and a `toggle` method, might be defined like:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Todo extends DefineObject {
   static define = {
@@ -123,10 +122,10 @@ console.log( myTodo.serialize() ); //-> {name: "my first todo!", completed: true
 
 The _Object_ set on `static define` defines the properties that will be
 on _instances_ of a `Todo`.  There are a lot of ways to define properties.  The
-[can-define.types.propDefinition] type lists them all.  Here, we define:
+[can-define-object/object.types.propDefinition] type lists them all.  Here, we define:
 
- - `name` as a property that will be type coerced into a `String`.
- - `completed` as a property that will be type coerced into a `Boolean`
+ - `name` as a property that will be type checked as a `String`.
+ - `completed` as a property that will be type check as a `Boolean`
    with an initial value of `false`.
 
 This also defines a `toggle` method that will be available on _instances_ of `Todo`.
@@ -173,7 +172,7 @@ console.log( anotherTodo.name ); //-> "Mow lawn"
 
 Arguably `can-define-object`'s most important ability is its support of declarative properties
 that functionally derive their value from other property values.  This is done by
-defining [can-define-object.types.get getter] properties like `fullName` as follows:
+defining [can-define-object/define/get getter] properties like `fullName` as follows:
 
 ```js
 import { DefineObject } from "can";
@@ -232,7 +231,7 @@ the value of the `getter` is cached and only updates when one of its source
 observables change.  For example:
 
 ```js
-import { DefineObject } from "can";
+import { DefineObject } from "can/everything";
 
 class Person extends DefineObject {
   static define = {
@@ -248,13 +247,13 @@ class Person extends DefineObject {
 
 const hero = new Person( { first: "Wonder", last: "Woman" } );
 
-console.log( hero.fullName ); // logs Wonder Woman
+console.log( hero.fullName ); // logs "calculating fullName", "Wonder Woman"
 
-console.log( hero.fullName ); // logs Wonder Woman
+console.log( hero.fullName ); // logs "calculating fullName", "Wonder Woman"
 
 hero.on( "fullName", () => {} );
 
-console.log( hero.fullName ); // logs "Wonder Woman"
+console.log( hero.fullName ); // logs "calculating fullName", "Wonder Woman"
 
 hero.first = "Bionic";        // logs "calculating fullName"
 
@@ -264,7 +263,7 @@ console.log( hero.fullName ); // logs "Bionic Man"
 ```
 @codepen
 
-If you want to prevent repeat updates, use [can-queues.batch.start]:
+If you want to prevent repeated updates, use [can-queues.batch.start]:
 
 ```js
 import {queues} from "//unpkg.com/can@5/core.mjs"
@@ -324,7 +323,7 @@ your template will automatically bind on the `todo` property.  But to use it in 
 look like:
 
 ```js
-import { DefineObject, ajax, fixture } from "can/ecosystem";
+import { DefineObject, ajax, fixture } from "can/everything";
 
 class Todo extends DefineObject {
   static define = {
@@ -339,14 +338,13 @@ class Todo extends DefineObject {
 }
 
 fixture( "GET /todos/5", () => {
-	return { id: 5, name: "take out trash" };
+  return { id: 5, name: "take out trash" };
 } );
 
 const todoVM = new TodoViewModel( { todoId: 5 } );
 
 todoVM.on( "todo", function( ev, newVal ) {
-
-	console.log( newVal.name ) //-> "take out trash"
+  console.log( newVal.name ) //-> "take out trash"
 } );
 
 console.log(todoVM.todo) //-> undefined
@@ -355,9 +353,9 @@ console.log(todoVM.todo) //-> undefined
 
 ### Getter limitations
 
-There's some functionality that a getter or an async props can not describe
-declaratively.  For these situations, you can use [can-define-object.types.set] or
-even better, use [can-define-object.types.value].
+There's some functionality that a getter or an asynchronous property can not describe
+declaratively.  For these situations, you can use [can-define-object/define/set] or
+even better, use [can-define-object/define/value].
 
 For example, consider a __state__ and __city__ locator where you pick a United States
 __state__ like _Illinois_ and then a __city__ like _Chicago_.  In this example,
@@ -391,14 +389,13 @@ console.log( locator.city ); //-> null;
 @codepen
 
 The problem with this code is that it relies on side effects to manage the behavior of
-`city`.  If someone wants to understand how `city` behaves, they might have search the entire
-map's code.  
+`city`.  If someone wants to understand how `city` behaves, they might have to search all of the code for the Locator class.
 
-The [can-define-object.types.value] behavior allows you to consolidate the
-behavior of a property to a single place.  For example, the following implements `Locator` with [can-define-object.types.value]:
+The [can-define-object/define/value] behavior allows you to consolidate the
+behavior of a property to a single place.  For example, the following implements `Locator` with [can-define-object/define/value]:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Locator extends DefineObject {
   static define = {
@@ -406,16 +403,16 @@ class Locator extends DefineObject {
 
     city: {
       value({ lastSet, listenTo, resolve }) {        
-  			// When city is set, update `city` with the set value.
-  		  listenTo( lastSet, resolve );
+        // When city is set, update `city` with the set value.
+        listenTo( lastSet, resolve );
 
-  			// When state is set, set `city` to null.
-  	    listenTo( "state", function() {
-  				resolve( null );
-  			} );
+        // When state is set, set `city` to null.
+        listenTo( "state", function() {
+          resolve( null );
+        } );
 
-  			// Initialize the value to the `set` value.
-  			resolve( lastSet.get() );
+        // Initialize the value to the `set` value.
+        resolve( lastSet.get() );
       }
     }
   };
@@ -433,16 +430,16 @@ console.log( locator.city ); //-> null
 
 While [functional reactive programming](https://en.wikipedia.org/wiki/Functional_reactive_programming) (FRP) can take time to
 master at first, once you do, your code will be much easier to understand and
-debug. The [can-define.types.value] behavior supports the basics of FRP programming - the ability to listen events and changes
+debug. The [can-define-object/define/value] behavior supports the basics of FRP programming - the ability to listen events and changes
 in other properties and `resolve` the property to a new value.
 
 ## Sealed instances and strict mode
 
 By default, `DefineObject` instances are __not__ [can-define-object/object.seal sealed].  This
-means that setting properties that are not defined when the constructor is defined will be set on those instances any ways.
+means that setting properties that are not defined when the constructor is defined will be set on those instances anyway.
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class MyType extends DefineObject {
   static define = {
@@ -459,7 +456,7 @@ myType.otherProp = "value"; // no error thrown
 Setting the extended DefineObject to be sealed will instead result in throwing an error in files that are in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode). For example:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class MyType extends DefineObject {
   static define = {

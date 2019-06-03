@@ -14,9 +14,12 @@ Defines custom serialization behavior for a property.
 
   class MyMap extends DefineObject {
     static define = {
-      serialize( currentValue, propertyName ) {
-        console.log( currentValue ); //-> "Value"
-        console.log( propertyName ); //-> "example"
+      example: {
+        serialize( currentValue, propertyName ) {
+          console.log( currentValue ); //-> "Value"
+          console.log( propertyName ); //-> "example"
+          return currentValue;
+        }
       }
     };
   }
@@ -52,7 +55,7 @@ The following causes a locationIds property to be serialized into
 the comma separated ID values of the location property on this instance:
 
 ```js
-import { DefineObject, DefineArray } from "can/ecosystem";
+import { DefineObject, DefineArray } from "can/everything";
 
 class MyMap extends DefineObject {
   static define = {
@@ -80,7 +83,7 @@ object.  For example, if the property numPages is not greater than zero, the fol
 won't include it in the serialized object.
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class MyBook extends DefineObject {
   static define = {

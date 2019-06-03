@@ -66,7 +66,7 @@ The following makes setting a `page` property update the `offset`:
 
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Pages extends DefineObject {
   static define = {
@@ -90,7 +90,7 @@ console.log( book.offset ); //-> 45
 The following makes changing `makeId` un-define the `modelId` property:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Car extends DefineObject {
   static define = {
@@ -123,7 +123,7 @@ When a setter returns `undefined`, its behavior changes depending on the number 
 With 0 arguments, the original set value is set on the attribute.
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class MyMap extends DefineObject {
   static define = {
@@ -144,7 +144,7 @@ console.log( map.prop ); //-> "foo"
 With 1 argument, an `undefined` return value will set the property to `undefined`.  
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class MyMap extends DefineObject {
   static define = {
@@ -169,7 +169,7 @@ A set function provides a useful hook for performing side effect logic as a cert
 In the example below, Paginator DefineObject includes a `page` property, which derives its value entirely from other properties (limit and offset).  If something tries to set the `page` directly, the set method will set the value of `offset`:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Paginate extends DefineObject {
   static define = {
@@ -199,7 +199,7 @@ console.log( p.page ); //-> 2
 By default, if a value returned from a setter is an object the effect will be to replace the property with the new object completely.
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Contact extends DefineObject {
   static define = {
@@ -226,7 +226,7 @@ console.log( info === alice.info ); // -> false
 In contrast, you can merge properties with:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Contact extends DefineObject {
   static define = {

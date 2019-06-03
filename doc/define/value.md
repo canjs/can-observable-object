@@ -17,7 +17,7 @@ Specify the behavior of a property by listening to changes in other properties.
   For example, the following counts the number of times the `name` property changed:
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Person extends DefineObject {
     static define = {
@@ -115,7 +115,7 @@ Specify the behavior of a property by listening to changes in other properties.
     normal object property that can be get or set:
 
     ```js
-    import { DefineObject } from "can/ecosystem";
+    import { DefineObject } from "can/everything";
 
     class Example extends DefineObject {
       static define = {
@@ -148,7 +148,7 @@ Specify the behavior of a property by listening to changes in other properties.
   is returned to clear the interval when the property is returned:
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class Timer extends DefineObject {
     static define = {
@@ -194,7 +194,7 @@ Our next example shows how [can-define-object/define/get] should be used with th
 that derives its value from the instantaneous `first` and `last` values:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Person extends DefineObject {
   static define = {
@@ -219,7 +219,7 @@ passage of time.
 The following `fullNameChangeCount` increments every time `fullName` changes:
 
 ```js
-import { DefineObject } from "can/ecosystem";
+import { DefineObject } from "can/everything";
 
 class Person extends DefineObject {
   static define = {

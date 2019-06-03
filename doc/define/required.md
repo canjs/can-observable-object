@@ -9,7 +9,7 @@ Defines whether the property is required.
   Specifies if the property is required. By default all properties are *not* required. Setting a property required will result in instantiation throwing if the property is omitted.
 
   ```js
-  import { DefineObject } from "can/ecosystem";
+  import { DefineObject } from "can/everything";
 
   class MyMap extends DefineObject {
     static define = {

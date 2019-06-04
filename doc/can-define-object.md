@@ -3,7 +3,8 @@
 @collection can-ecosystem
 @group can-define-object/object.behaviors 0 behaviors
 @group can-define-object/object.static 1 static
-@group can-define-object/object.types 2 types
+@group can-define-object/object.prototype 2 prototype
+@group can-define-object/object.types 3 types
 @alias can.DefineObject
 @templateRender true
 

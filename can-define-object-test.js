@@ -40,3 +40,22 @@ QUnit.test("Passing undefined props into extended DefineObject", function(assert
 
 	inst.a = "c";
 });
+
+
+QUnit.test("Primitives can be provided as the default as the property value", function(assert) {
+	class Person extends DefineObject {
+		static get define() {
+			return {
+				age: 13,
+				likesChocolate: false,
+				favoriteColor: "green"
+			};
+		}
+	}
+
+	let person = new Person();
+
+	assert.equal(person.age, 13, "Number works");
+	assert.equal(person.likesChocolate, false, "Boolean works");
+	assert.equal(person.favoriteColor, "green", "Strings work");
+});

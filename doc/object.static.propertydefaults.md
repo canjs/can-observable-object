@@ -5,7 +5,7 @@
 
 @signature `static propertyDefaults = PROPDEFINITION`
 
-Specify default values using a [can-define-object/object.types.propDefinition] object.
+Specify default values using a [can-define-object/object.types.definitionObject] object.
 
 ```js
 import { DefineObject } from "can/everything";

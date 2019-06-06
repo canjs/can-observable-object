@@ -1,4 +1,4 @@
-@typedef {Object|String|Constructor|Array|GETTER|SETTER} can-define-object/object.types.propDefinition PropDefinition
+@typedef {Object|String|Constructor|Array|GETTER|SETTER} can-define-object/object.types.definitionObject DefinitionObject
 @parent can-define-object/object.types
 
 Defines the type, initial value, and get, set, and serialize behavior for an
@@ -243,19 +243,19 @@ observable property.  These behaviors can be specified with as an `Object`, `Str
 ## Use
 
 A property definition can be defined in several ways.  The `Object` form is the most literal
-and directly represents a `PropDefinition` object.  The other forms
-get converted to a `PropDefinition` as follows:
+and directly represents a `DefinitionObject` object.  The other forms
+get converted to a `DefinitionObject` as follows:
 
 
 ```js
 class extends DefineObject {
-  propertyA: {},                   // -> PropertyDefinition
+  propertyA: {},                   // -> DefinitionObject
   propertyB: String,               // -> {type: String}
   propertyC: type.check(Number)    // -> TypeObject
 }
 ```
 
-Within a property definition, the available properties and their signatures look like:
+Within a definition object, the available properties and their signatures look like:
 
 ```js
 DefineMap.extend({

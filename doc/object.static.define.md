@@ -146,12 +146,12 @@ class ViewModel extends DefineObject {
 }
 ```
 
-### PropDefinition
+### DefinitionObject
 
-Define a property through a [can-define.types.propDefinition]. This allows you define several different behaviors (as shown in the sidebar).
+Define a property through a [can-define-object/object.types.definitionObject]. This allows you define several different behaviors (as shown in the sidebar).
 
 ```js
-import { DefineObject } from "can/everything";
+import { DefineObject, type } from "can/everything";
 
 class Person extends DefineObject {
   static define = {

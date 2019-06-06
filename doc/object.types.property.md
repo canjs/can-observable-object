@@ -1,4 +1,4 @@
-@typedef {PrimitiveValue|PrimitiveConstructor|Constructor|TypeObject|Function|PropDefinition} can-define-object/object.types.property Property
+@typedef {PrimitiveValue|PrimitiveConstructor|Constructor|TypeObject|Function|DefinitionObject} can-define-object/object.types.property Property
 @parent can-define-object/object.types
 
 @type {PrimitiveValue} Specify a property with a default primitive value. Using this signature will result in strict type checking being applied to this property.
@@ -67,7 +67,7 @@
 @type {TypeObject} Specify a property as a special TypeObject. Most of the time you'll use this in conjunction with [can-type] to specify a type.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { DefineObject, type } from "can/everything";
 
   class Person extends DefineObject {
     static define = {
@@ -120,10 +120,10 @@
   }
   ```
 
-@type {PropDefinition} Define a property through a [can-define.types.propDefinition]. This allows you define several different behaviors (as shown in the sidebar).
+@type {DefinitionObject} Define a property through a [can-define-object/object.types.definitionObject]. This allows you define several different behaviors (as shown in the sidebar).
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { DefineObject, type } from "can/everything";
 
   class Person extends DefineObject {
     static define = {

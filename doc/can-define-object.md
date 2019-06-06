@@ -123,7 +123,7 @@ console.log( myTodo.serialize() ); //-> {name: "my first todo!", completed: true
 
 The _Object_ set on `static define` defines the properties that will be
 on _instances_ of a `Todo`.  There are a lot of ways to define properties.  The
-[can-define-object/object.types.propDefinition] type lists them all.  Here, we define:
+[can-define-object/object.types.definitionObject] type lists them all.  Here, we define:
 
  - `name` as a property that will be type checked as a `String`.
  - `completed` as a property that will be type check as a `Boolean`

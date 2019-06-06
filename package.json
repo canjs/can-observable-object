@@ -36,18 +36,13 @@
     "main": "src/can-define-object.js"
   },
   "dependencies": {
-    "can-define-mixin": "^0.2.0",
-    "cssify": "^0.6.0",
-    "steal-less": "^1.2.2"
+    "can-define-mixin": "^0.2.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "can-reflect": "^1.17.10",
-    "done-serve": "^3.0.0",
-    "donejs-cli": "^3.0.0-pre.5",
-    "generator-donejs": "^3.0.0",
     "jshint": "^2.9.1",
     "steal": "^2.1.6",
     "steal-qunit": "^1.0.1",

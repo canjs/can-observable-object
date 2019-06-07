@@ -1,27 +1,37 @@
-@typedef {Object|String|Constructor|Array|GETTER|SETTER} can-define-object/object.types.definitionObject DefinitionObject
+@typedef {Object|Constructor|can-type.typeobject} can-define-object/object.types.definitionObject DefinitionObject
 @parent can-define-object/object.types
 
 Defines the type, initial value, and get, set, and serialize behavior for an
-observable property.  These behaviors can be specified with as an `Object`, `String`,
-`Constructor` function, `Array`, a `getter expression`, or `setter expression`.
+observable property.  These behaviors can be specified with as an `Object`,
+`Constructor` function, or a [can-type.typeobject].
 
 @type {Object} Defines multiple behaviors for a single property.
 
+Properties inside of [can-define-object/object.static.define] can be defined in any of the following ways:
 
 ```js
 {
-  propertyName: {
-    default: primitiveValue,
-    get default() { /* ... */ },
-    type: Constructor,
-    get() { /* ... */ },
-    value() { /* ... */ },
-    async() { /* ... */ }
-    set() { /* ... */ },
-    serialize() { /* ... */ },
-    required: Boolean,
-    identity: Boolean
-  }
+  type:
+        TypeObject |
+        PrimitiveFunction |
+        ConstructorFunction |
+        FunctionFunction      //?
+
+  default:
+        Primitive |
+        Function |
+        Object
+
+  get default(){}
+
+  get(){}
+  set( [newVal] [,lastSet] ){}
+  async( [resolve] ){}
+  value( {resolve, listenTo, stopListening, lastSet}){},
+
+  required: Boolean=false,
+  enumerable: Boolean,
+  serialize(value):Any
 }
 ```
 
@@ -215,7 +225,7 @@ observable property.  These behaviors can be specified with as an `Object`, `Str
   ```
   @codepen
 
-@type {Constructor} Defines the property to be strictly checked to match the provided type.
+@type {Constructor} Foo Defines the property to be strictly checked to match the provided type.
 
   ```js
   {

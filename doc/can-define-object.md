@@ -54,7 +54,7 @@
 		last: "Meyer"
   } );
 
-  console.log( person.serialize() ); //-> {first: "Justin", last: "Meyer"}
+  console.log( person ); //-> {first: "Justin", last: "Meyer"}
   ```
   @codepen
 
@@ -146,7 +146,7 @@ class Todo extends DefineObject {
 
 const myTodo = new Todo({ name: "my first todo!" });
 myTodo.toggle();
-console.log( myTodo.serialize() ); //-> {name: "my first todo!", completed: true}
+console.log( myTodo ); //-> {name: "my first todo!", completed: true}
 ```
 @codepen
 
@@ -312,7 +312,7 @@ look like:
 ```js
 import { DefineObject, ajax, fixture } from "can/everything";
 
-class Todo extends DefineObject {
+class TodoViewModel extends DefineObject {
   static define = {
     todoId: Number,
 
@@ -351,7 +351,7 @@ we want to clear the choice of __city__ whenever the __state__ changes.
 This can be implemented with [can-define-object/define/set] like:
 
 ```js
-import { DefineObject } from "can/everything";
+import { DefineObject, type } from "can/everything";
 
 class Locator extends DefineObject {
   static define = {
@@ -361,7 +361,7 @@ class Locator extends DefineObject {
         this.city = null;
       }
     },
-    city: String
+    city: type.maybe(String)
   };
 }
 
@@ -453,7 +453,11 @@ class MyType extends DefineObject {
 
 const myType = new MyType();
 
-myType.otherProp = "value"; // error!
+try {
+  myType.otherProp = "value"; // error!
+} catch(err) {
+  console.log(err.message);
+}
 ```
 @highlight 8
 @codepen

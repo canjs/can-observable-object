@@ -257,3 +257,30 @@ console.log( info === alice.info ); // -> true
 ## Batched Changes
 
 By default, calls to `set` methods are wrapped in a call to [can-queues.batch.start] and [can-queues.batch.stop], so if a set method has side effects that set more than one property, all these sets are wrapped in a single batch for better performance.
+
+## Used with type
+
+When providing __set_ along with [can-define-object/define/type], the type converter runs before set. This means you don't have to worry about handling the raw value being set.
+
+```js
+import { DefineObject, type } from "can/everything";
+
+class Counter extends DefineObject {
+  static define = {
+    max: 100,
+    count: {
+      type: type.convert(Number),
+      set(val) {
+        if(val > this.max) {
+          return this.max;
+        }
+        return val;
+      }
+    }
+  }
+}
+
+let counter = new Counter({ count: "101" });
+console.log(counter.count); // -> 100
+```
+@codepen

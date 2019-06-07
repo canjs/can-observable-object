@@ -22,11 +22,11 @@ Returns the default value for instances of the defined type.  The default value 
   }
 
   const ex = new Example();
-  console.log( ex.prop.serialize() ); //-> []
+  console.log( ex.prop ); //-> []
   ```
   @codepen
 
-  If the default value should be an object of some type, it should be specified as the return value of a getter function (the above call signature) so that all instances of this map don't point to the same object.  For example, if the property `value` above had not returned an empty array but instead just specified an array using the next call signature below, all instances of that map would point to the same array (because JavaScript passes objects by reference).
+  If the default value should be an object of some type, it should be specified as the return value of a getter function (the above call signature) so that all instances of this map don't point to the same object.  For example, if the property `value` above had not returned an empty array but instead just specified an array using [can-define-object/define/default], all instances of that map would point to the same array (because JavaScript passes objects by reference).
 
   @return {*} The default value.  This will be passed through setter and type.
 
@@ -54,6 +54,6 @@ class Person extends DefineObject {
 
 const person = new Person();
 console.log( person.age ); //-> 0
-console.log( person.address.serialize() ); //-> { city: "Chicago", state: "IL" }
+console.log( person.address ); //-> { city: "Chicago", state: "IL" }
 ```
 @codepen

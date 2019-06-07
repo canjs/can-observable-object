@@ -3,33 +3,59 @@
 
 @description async
 
-Specifies an *asynchronous* property whose value will be resolved later. `async`
+Specify an *asynchronous* property whose value will be resolved later. `async`
 properties are computed and automatically update themselves when a dependent
 observable value is changed.
 
-@signature `async( resolve(value), lastSetValue )`
+@signature `async( resolve(value), [ lastSetValue ] )`
 
-Asynchronously defines the behavior when a value is read on an instance.
+  Asynchronously defines the behavior when a value is read on an instance.
 
-Only observed properties (via [can-event-queue/map/map.on], [can-event-queue/map/map.addEventListener], etc) will be passed the `resolve` function.  It will be `undefined` if the value is not observed. This is for memory safety.
+  Only observed properties (via [can-event-queue/map/map.on], [can-event-queue/map/map.addEventListener], etc) will be passed the `resolve` function.  It will be `undefined` if the value is not observed. This is for memory safety.
 
-Specify `async` like:
+  Specify `async` like:
 
-```js
-define = {
-	propertyName: {
-		async( resolve, lastSetValue ) { /* ... */ }
-	}
-}
-```
+  ```js
+  import { DefineObject } from "can/everything";
+
+  class AppViewModel extends DefineObject {
+    static define = {
+      customerId: Number,
+      customer: {
+        async(resolve) {
+          Customer.get({ id: this.customerId })
+            .then(customer => {
+              resolve(customer);
+            });
+        }
+      }
+    };
+  }
+  ```
+
+  You can also return a Promise rather than calling `resolve`.
+
+  ```js
+  import { DefineObject } from "can/everything";
+
+  class AppViewModel extends DefineObject {
+    static define = {
+      customerId: Number,
+      customer: {
+        async(resolve) {
+          return Customer.get({ id: this.customerId });
+        }
+      }
+    };
+  }
+  ```
 
   @param {function|undefined} resolve(value) Updates the value of the property. This can be called
   multiple times if needed. Will be `undefined` if the value is not observed.
 
   @param {*} lastSetValue The value last set by `instance.propertyName = value`.
 
-  @return {*} The value of the property before `resolve` is called.  Or a value for unobserved property reads
-  to return.
+  @return {*|Promise} The value of the property before `resolve` is called, or a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that will resolve with the value.
 
 @body
 
@@ -46,7 +72,7 @@ Often, a virtual property's value only becomes available after some period of ti
 given a `personId`, one might want to retrieve a related person:
 
 ```js
-import { DefineObject } from "can";
+import { DefineObject } from "can/everything";
 
 class AppState extends DefineObject {
   static define = {

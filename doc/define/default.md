@@ -6,7 +6,7 @@ Specifies the default value for instances of the defined type.
 
 @signature `default`
 
-  Any value can be provided as the default value used for this property, like:
+  Provide *primitive* values to act as the initial value for the property if no value is provided upon instantiation. For example:
 
   ```js
   import { DefineObject } from "can/everything"
@@ -21,9 +21,18 @@ Specifies the default value for instances of the defined type.
 
   const ex = new Example();
   console.log( ex.prop ); //-> "foo"
-
   ```
   @codepen
+
+  This could also be written using the [can-define-object/object.types.property] shorthand method:
+
+  ```js
+  class Example extends DefineObject {
+    static define = {
+      prop: "foo"
+    };
+  }
+  ```
 
   @param {*} defaultVal The default value, which will be passed through setter and type.
 
@@ -50,6 +59,6 @@ console.log( person.age ); //-> 0
 ```
 @codepen
 
-## Alternates
+## Other ways to set the default
 
 There is a second way to provide a default value, which is explained in [can-define-object/define/get-default ] and is useful when defining an object as a default.

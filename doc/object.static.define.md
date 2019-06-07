@@ -7,9 +7,46 @@ Specifies properties and their associated definitions.
 
 @signature `static define = { PROPERTIES }`
 
-  Specify properties to be defined on this object type.
+  Specify properties to be defined on this object type. Each property can use any of the methods specified in the [can-define-object/object.types.property property docs]. Commonly you'll use the shorthand to specify a type:
 
-  @param {Object} define An object with property definitions.
+  ```js
+  class Favorites extends DefineObject {
+    static define = {
+      color: String,
+      movie: String
+    };
+  }
+  ```
+
+  The full schema for what is available for each property is:
+
+  ```js
+  {
+    type:
+          TypeObject |
+          PrimitiveFunction |
+          ConstructorFunction |
+          FunctionFunction      //?
+
+    default:
+          Primitive |
+          Function |
+          Object
+
+    get default(){}
+
+    get(){}
+    set( [newVal] [,lastSet] ){}
+    async( [resolve] ){}
+    value( {resolve, listenTo, stopListening, lastSet}){},
+
+    required: Boolean=false,
+    enumerable: Boolean,
+    serialize(value):Any
+  }
+  ```
+
+  @param {Object<String,can-define-object/object.types.property>} define An object with property definitions.
 
 @body
 

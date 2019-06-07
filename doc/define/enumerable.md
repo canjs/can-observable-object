@@ -8,8 +8,9 @@ Defines whether the property is [enumerable](https://developer.mozilla.org/en-US
 @signature `Boolean`
 
   Specifies if the property should be enumerable.  By default, all properties except for
-  ones with defined [can-define-object/define/get getters] are serialized. Prevent a property
-  from being serialized like:
+  ones with defined [can-define-object/define/get getters], [can-define-object/define/async], and [can-define-object/define/value] are serialized.
+
+  You can prevent a property from being serialized like:
 
   ```js
   import { DefineObject } from "can/everything";
@@ -37,7 +38,9 @@ Defines whether the property is [enumerable](https://developer.mozilla.org/en-US
   class MyMap extends DefineObject {
     static define = {
       propertyName: {
-        get() { return "test"; },
+        get() {
+          return "test";
+        },
         enumerable: true
       }
     };
@@ -48,3 +51,5 @@ Defines whether the property is [enumerable](https://developer.mozilla.org/en-US
   console.log( map.serialize() ); //-> { propertyName: "test" }
   ```
   @codepen
+
+  __enumerable__ also controls `for/in` loops, [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign), and [Object.keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys), among others. See [enumerability](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#Enumerable_attribute) for more information.

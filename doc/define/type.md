@@ -1,5 +1,6 @@
 @property can-define-object/define/type type
 @parent can-define-object/object.behaviors
+@outline 2
 
 @description
 
@@ -63,7 +64,7 @@ Specify a type for the property.
 
   Defines a type that conforms to the TypeObject API: an object with a `can.new` and `can.isMember` symbol.
 
-  instances. For example here is an inline TypeObject:
+  For example here is an inline [can-type.typeobject] that behaves like [can-type/convert type.convert(Date)]:
 
   ```js
   import { DefineObject } from "can/everything";
@@ -83,7 +84,6 @@ Specify a type for the property.
     };
   }
   ```
-  @codepen
 
 @body
 
@@ -95,7 +95,7 @@ as either:
 - A primitive constructor function.
 - A built-in constructor function like `Date`.
 - A constructor function such as another [can-define-object DefineObject].
-- A TypeObject.
+- A [can-type.typeobject].
 
 ### Basic Example
 
@@ -133,3 +133,27 @@ const map = new Map({ count: "4", items: "1,2,3" });
 console.log(map.count, map.items); //-> 4 ["1", "2", "3"]
 ```
 @codepen
+
+### Shorthand
+
+The [can-define-object/object.types.property] docs specify shorthands for setting the type. The shorthand allows you to define the type without using a [can-define-object/object.types.definitionObject] like so:
+
+```js
+import { DefineObject } from "can/everything";
+
+class Person extends DefineObject {
+  age: Number
+}
+```
+
+### Use with can-type
+
+[can-type] provides convenient ways to use types with a variety of behaviors like type [can-type/check checking] and [can-type/convert converting]. You can use these with the [can-define-object/object.types.property] shorthand like so:
+
+```js
+import { DefineObject, type } from "can/everything";
+
+class Person extends DefineObject {
+  age: type.convert(Number)
+}
+```

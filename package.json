@@ -36,7 +36,7 @@
     "main": "src/can-define-object.js"
   },
   "dependencies": {
-    "can-define-mixin": "^0.2.10"
+    "can-define-mixin": "^0.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

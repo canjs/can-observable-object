@@ -1,6 +1,6 @@
 # can-define-object
 
-[![Build Status](https://travis-ci.org/DoneJS/can-define-object.svg?branch=master)](https://travis-ci.org/DoneJS/can-define-object)
+[![Build Status](https://travis-ci.org/DoneJS/can-define-object.svg?branch=master)](https://travis-ci.org/DoneJS/can-define-object) [![Greenkeeper badge](https://badges.greenkeeper.io/canjs/can-define-object.svg)](https://greenkeeper.io/)
 
 The DefineObject
 

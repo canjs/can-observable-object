@@ -187,6 +187,56 @@ console.log( myTodo.completed ); //-> true
 @codepen
 @highlight 14
 
+## Typed properties
+
+DefineObject uses [can-type] to define typing rules for properties. It supports both strict typing (type checking) and loose typing (type conversion).
+
+If a property is specified as a specific type, DefineObject will perform type checking. This means that if the `first` property in the example below is set to any value that is not a string, an error will be thrown:
+
+```js
+import { DefineObject } from "can/everything";
+
+class Person extends DefineObject {
+  static define = {
+    first: String
+  };
+}
+
+const person = new Person();
+person.first = "Justin"; // -> 👌
+
+person.first = false; // -> Uncaught Error: Type value 'false' is not of type String.
+```
+@codepen
+
+[can-type] also supports functions like [can-type/maybe type.maybe] and [can-type/convert type.convert] for handling other typing options. In the example below, `maybeNumber` can be a number or `null` or `undefined` and `alwaysString` will be converted to a string no matter what value is passed.
+
+```js
+import { DefineObject, type } from "can/everything";
+
+class Obj extends DefineObject {
+  static define = {
+    maybeNumber: type.maybe(Number),
+    alwaysString: type.convert(String)
+  };
+}
+
+const obj = new Obj();
+
+obj.maybeNumber = 9;  // -> 👌
+obj.maybeNumber = null;  // -> 👌
+obj.maybeNumber = undefined;  // -> 👌
+obj.maybeNumber = "not a number";  // -> Uncaught Error: Type value 'not a number' is not of type Number.
+
+obj.alwaysString = "Hello";  // -> 👌
+obj.alwaysString = 9;  // -> 👌, converted to "9"
+obj.alwaysString = null;  // -> 👌, converted to "null"
+obj.alwaysString = undefined;  // -> 👌, converted to "undefined"
+```
+@codepen
+
+To see all the ways types can be defined, check out the [can-type can-type docs].
+
 ## Declarative properties
 
 Arguably `can-define-object`'s most important ability is its support of declarative properties

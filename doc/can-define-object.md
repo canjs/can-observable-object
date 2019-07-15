@@ -6,6 +6,7 @@
 @group can-define-object/object.prototype 2 prototype
 @group can-define-object/object.types 3 types
 @alias can.DefineObject
+@package ../package.json
 @outline 2
 @templateRender true
 

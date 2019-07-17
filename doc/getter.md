@@ -1,12 +1,12 @@
-@function can-define-object/getter get property()
-@parent can-define-object/object.prototype
+@function can-observable-object/getter get property()
+@parent can-observable-object/object.prototype
 
-@description Specify a property's [can-define-object/define/get] behavior with the [get syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get).
+@description Specify a property's [can-observable-object/define/get] behavior with the [get syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get).
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Example extends DefineObject {
+class Example extends ObservableObject {
   get propertyName() {
     return true;
   }
@@ -20,10 +20,10 @@ console.log( e.propertyName ); //-> true
 For example:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String,
     last: String
   };
@@ -41,10 +41,10 @@ console.log( person.fullName ); //-> "Justin Meyer"
 This is a shorthand for providing an object with a `get` property like:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String,
     last: String,
     fullName: {
@@ -60,4 +60,4 @@ console.log( person.fullName ); //-> "Justin Meyer"
 ```
 @codepen
 
-You must use an object with a [can-define-object/define/get] property if you want your get to take the `lastSetValue` or `resolve` arguments.
+You must use an object with a [can-observable-object/define/get] property if you want your get to take the `lastSetValue` or `resolve` arguments.

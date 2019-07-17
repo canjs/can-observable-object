@@ -1,5 +1,5 @@
-@property can-define-object/define/get get
-@parent can-define-object/object.behaviors
+@property can-observable-object/define/get get
+@parent can-observable-object/object.behaviors
 
 @description
 
@@ -31,7 +31,7 @@ get propertyName() {
 
   @param {*} [lastSetValue] The value last set by `instance.propertyName = value`.  Typically, _lastSetValue_
   should be an observable value, like a [can-simple-observable] or promise. If it's not, it's likely
-  that a [can-define-object/define/set] should be used instead.
+  that a [can-observable-object/define/set] should be used instead.
 
   @return {*} The value of the property.
 
@@ -54,10 +54,10 @@ Whenever a getter is provided, it is wrapped in a [can-observation], which ensur
 that whenever its dependent properties change, a change event will fire for this property also.
 
 ```js
-import { DefineObject } from "can";
+import { ObservableObject } from "can";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String,
     last: String
   };
@@ -88,10 +88,10 @@ For example, a property might be set to a observable, but when read, provides th
 of the observable.
 
 ```js
-import { DefineObject, SimpleObservable, Reflect } from "can";
+import { ObservableObject, SimpleObservable, Reflect } from "can";
 
-class MyMap extends DefineObject {
-  static define = {
+class MyMap extends ObservableObject {
+  static props = {
     value: {
       get( lastSetValue ) {
         return lastSetValue.value;
@@ -113,4 +113,4 @@ console.log(map.value); //-> 2
 This technique should only be used when the `lastSetValue` is some form of
 observable, that when it changes, can update the `getter` value.
 
-For simple conversions, [can-define-object/define/set] or [can-define-object/define/type] should be used.
+For simple conversions, [can-observable-object/define/set] or [can-observable-object/define/type] should be used.

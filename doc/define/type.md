@@ -1,5 +1,5 @@
-@property can-define-object/define/type type
-@parent can-define-object/object.behaviors
+@property can-observable-object/define/type type
+@parent can-observable-object/object.behaviors
 @outline 2
 
 @description
@@ -13,10 +13,10 @@ Specify a type for the property.
   If the value provided for this property is of another type, or is `null` or `undefined`, it will throw.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       age: {
         type: Number
       }
@@ -40,10 +40,10 @@ Specify a type for the property.
   If the value provided for this property is of another type, or is `null` or `undefined`, it will throw.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       birthday: {
         type: Date
       }
@@ -67,10 +67,10 @@ Specify a type for the property.
   For example here is an inline [can-type.typeobject] that behaves like [can-type/convert type.convert(Date)]:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       birthday: {
         type: {
           [Symbol.for("can.new")](value) {
@@ -94,7 +94,7 @@ as either:
 
 - A primitive constructor function.
 - A built-in constructor function like `Date`.
-- A constructor function such as another [can-define-object DefineObject].
+- A constructor function such as another [can-observable-object ObservableObject].
 - A [can-type.typeobject].
 
 ### Basic Example
@@ -102,7 +102,7 @@ as either:
 The following example converts the `count` property to a number and the `items` property to an array.
 
 ```js
-import { DefineObject, type } from "can";
+import { ObservableObject, type } from "can";
 
 const ArrayType = {
   [Symbol.for("can.new")]( newValue ) {
@@ -117,8 +117,8 @@ const ArrayType = {
   }
 };
 
-class Map extends DefineObject {
-  static define = {
+class Map extends ObservableObject {
+  static props = {
     count: {
       type: Number
     },
@@ -136,24 +136,24 @@ console.log(map.count, map.items); //-> 4 ["1", "2", "3"]
 
 ### Shorthand
 
-The [can-define-object/object.types.property] docs specify shorthands for setting the type. The shorthand allows you to define the type without using a [can-define-object/object.types.definitionObject] like so:
+The [can-observable-object/object.types.property] docs specify shorthands for setting the type. The shorthand allows you to define the type without using a [can-observable-object/object.types.definitionObject] like so:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
+class Person extends ObservableObject {
   age: Number
 }
 ```
 
 ### Use with can-type
 
-[can-type] provides convenient ways to use types with a variety of behaviors like type [can-type/check checking] and [can-type/convert converting]. You can use these with the [can-define-object/object.types.property] shorthand like so:
+[can-type] provides convenient ways to use types with a variety of behaviors like type [can-type/check checking] and [can-type/convert converting]. You can use these with the [can-observable-object/object.types.property] shorthand like so:
 
 ```js
-import { DefineObject, type } from "can/everything";
+import { ObservableObject, type } from "can/everything";
 
-class Person extends DefineObject {
+class Person extends ObservableObject {
   age: type.convert(Number)
 }
 ```

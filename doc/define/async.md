@@ -1,5 +1,5 @@
-@property can-define-object/define/async async
-@parent can-define-object/object.behaviors
+@property can-observable-object/define/async async
+@parent can-observable-object/object.behaviors
 
 @description async
 
@@ -16,10 +16,10 @@ observable value is changed.
   Specify `async` like:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class AppViewModel extends DefineObject {
-    static define = {
+  class AppViewModel extends ObservableObject {
+    static props = {
       customerId: Number,
       customer: {
         async(resolve) {
@@ -36,10 +36,10 @@ observable value is changed.
   You can also return a Promise rather than calling `resolve`.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class AppViewModel extends DefineObject {
-    static define = {
+  class AppViewModel extends ObservableObject {
+    static props = {
       customerId: Number,
       customer: {
         async(resolve) {
@@ -72,10 +72,10 @@ Often, a virtual property's value only becomes available after some period of ti
 given a `personId`, one might want to retrieve a related person:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class AppState extends DefineObject {
-  static define = {
+class AppState extends ObservableObject {
+  static props = {
     personId: Number,
     person: {
       async( resolve, lastSetValue ) {

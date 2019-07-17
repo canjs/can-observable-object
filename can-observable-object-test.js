@@ -1,12 +1,12 @@
-const DefineObject = require("./src/can-define-object");
+const ObservableObject = require("./src/can-observable-object");
 const QUnit = require("steal-qunit");
 const canReflect = require("can-reflect");
 
-QUnit.module('can-define-object');
+QUnit.module('can-observable-object');
 
 QUnit.test("Basics", function(assert){
-	class Faves extends DefineObject {
-		static get define() {
+	class Faves extends ObservableObject {
+		static get props() {
 			return {
 				color: "red"
 			};
@@ -17,8 +17,8 @@ QUnit.test("Basics", function(assert){
 	assert.equal(faves.color, "red", "yup");
 });
 
-QUnit.test("Passing undefined props into DefineObject", function(assert) {
-	let inst = new DefineObject({ a: 'b' });
+QUnit.test("Passing undefined props into ObservableObject", function(assert) {
+	let inst = new ObservableObject({ a: 'b' });
 	assert.equal(inst.a, "b", "passed them on");
 
 	canReflect.onKeyValue(inst, "a", function() {
@@ -28,10 +28,10 @@ QUnit.test("Passing undefined props into DefineObject", function(assert) {
 	inst.a = "c";
 });
 
-QUnit.test("Passing undefined props into extended DefineObject", function(assert) {
-	class ExtendedDefineObject extends DefineObject {}
+QUnit.test("Passing undefined props into extended ObservableObject", function(assert) {
+	class ExtendedObservableObject extends ObservableObject {}
 
-	let inst = new ExtendedDefineObject({ a: 'b' });
+	let inst = new ExtendedObservableObject({ a: 'b' });
 	assert.equal(inst.a, "b", "passed them on");
 
 	canReflect.onKeyValue(inst, "a", function() {
@@ -43,8 +43,8 @@ QUnit.test("Passing undefined props into extended DefineObject", function(assert
 
 
 QUnit.test("Primitives can be provided as the default as the property value", function(assert) {
-	class Person extends DefineObject {
-		static get define() {
+	class Person extends ObservableObject {
+		static get props() {
 			return {
 				age: 13,
 				likesChocolate: false,

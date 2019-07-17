@@ -1,5 +1,5 @@
-@property can-define-object/define/default default
-@parent can-define-object/object.behaviors
+@property can-observable-object/define/default default
+@parent can-observable-object/object.behaviors
 @description
 
 Specifies the default value for instances of the defined type.
@@ -9,10 +9,10 @@ Specifies the default value for instances of the defined type.
   Provide *primitive* values to act as the initial value for the property if no value is provided upon instantiation. For example:
 
   ```js
-  import { DefineObject } from "can/everything"
+  import { ObservableObject } from "can/everything"
 
-  class Example extends DefineObject {
-    static define = {
+  class Example extends ObservableObject {
+    static props = {
       prop: {
         default: "foo"
       }
@@ -24,11 +24,11 @@ Specifies the default value for instances of the defined type.
   ```
   @codepen
 
-  This could also be written using the [can-define-object/object.types.property] shorthand method:
+  This could also be written using the [can-observable-object/object.types.property] shorthand method:
 
   ```js
-  class Example extends DefineObject {
-    static define = {
+  class Example extends ObservableObject {
+    static props = {
       prop: "foo"
     };
   }
@@ -43,10 +43,10 @@ Specifies the default value for instances of the defined type.
 The following defaults `age` to `0` and `address` to an object:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     // A default age of `0`:
     age: {
       default: 0
@@ -61,4 +61,4 @@ console.log( person.age ); //-> 0
 
 ## Other ways to set the default
 
-There is a second way to provide a default value, which is explained in [can-define-object/define/get-default ] and is useful when defining an object as a default.
+There is a second way to provide a default value, which is explained in [can-observable-object/define/get-default ] and is useful when defining an object as a default.

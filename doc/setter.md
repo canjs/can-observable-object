@@ -1,7 +1,7 @@
-@function can-define-object/setter set property()
-@parent can-define-object/object.prototype
+@function can-observable-object/setter set property()
+@parent can-observable-object/object.prototype
 
-@description Specify a property's [can-define-object/define/set] behavior with the [set syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set).
+@description Specify a property's [can-observable-object/define/set] behavior with the [set syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set).
 
 ```js
 {
@@ -12,9 +12,9 @@
 For example:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
+class Person extends ObservableObject {
   set fullName(newValue) {
     const parts = newValue.split(" ");
     this.first = parts[0];
@@ -31,10 +31,10 @@ console.log( person.last ); //-> "Meyer"
 This is a shorthand for providing an object with a `set` property like:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     fullName: {
       set(newValue) {
         const parts = newValue.split(" ");

@@ -1,17 +1,17 @@
-@property can-define-object/object.static.define define
-@parent can-define-object/object.static
+@property can-observable-object/object.static.props props
+@parent can-observable-object/object.static
 
 @description
 
 Specifies properties and their associated definitions.
 
-@signature `static define = { PROPERTIES }`
+@signature `static props = { PROPERTIES }`
 
-  Specify properties to be defined on this object type. Each property can use any of the methods specified in the [can-define-object/object.types.property property docs]. Commonly you'll use the shorthand to specify a type:
+  Specify properties to be defined on this object type. Each property can use any of the methods specified in the [can-observable-object/object.types.property property docs]. Commonly you'll use the shorthand to specify a type:
 
   ```js
-  class Favorites extends DefineObject {
-    static define = {
+  class Favorites extends ObservableObject {
+    static props = {
       color: String,
       movie: String
     };
@@ -46,23 +46,23 @@ Specifies properties and their associated definitions.
   }
   ```
 
-  @param {Object<String,can-define-object/object.types.property>} define An object with property definitions.
+  @param {Object<String,can-observable-object/object.types.property>} define An object with property definitions.
 
 @body
 
 ## Use
 
-Use [can-define-object/object.static.define] to specify defined properties. A property can be specified one of these ways:
+Use [can-observable-object/object.static.props] to specify defined properties. A property can be specified one of these ways:
 
 ### Default primitive value
 
 Specify a property with a default primitive value. Using this signature will result in strict type checking being applied to this property.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     age: 72
   };
 }
@@ -79,10 +79,10 @@ me.age = "45"; // throws
 Specify a property by defining its type as a primitive constructor. This can be `String`, `Number`, or `Boolean`. Using this signature results in strict type checking for this property.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     age: Number
   };
 }
@@ -98,17 +98,17 @@ me.age = "45"; // throws
 
 ### Constructor
 
-Specify a property by defining its type as a constructor. This can be any constructor function, such as another [can-define-object DefineObject], builtins like `Date`, or plain JavaScript constructor functions.
+Specify a property by defining its type as a constructor. This can be any constructor function, such as another [can-observable-object ObservableObject], builtins like `Date`, or plain JavaScript constructor functions.
 
 Specify a constructor function as a property's value will result in strict type checking for this property.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Occupation extends DefineObject {}
+class Occupation extends ObservableObject {}
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     occupation: Occupation,
     birthday: Date
   };
@@ -128,10 +128,10 @@ me.birthday = "1970/3/19"; // throws
 Specify a property as a special TypeObject. Most of the time you'll use this in conjunction with [can-type] to specify a type.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: type.check(String),
     last: type.check(String),
     middle: type.maybe(String)
@@ -167,7 +167,7 @@ const dateType = {
 Specify a property as a function sets the property to `type: Function` and uses the provided function as the default value. A use-case for this signature is to have a [can-stache] renderer as a default template while allowing consumers of your component to provide an alternative renderer.
 
 ```js
-import { DefineObject, stache } from "can/everything";
+import { ObservableObject, stache } from "can/everything";
 
 // This is a function
 const headerView = stache(`
@@ -176,8 +176,8 @@ const headerView = stache(`
   </header>
 `);
 
-class ViewModel extends DefineObject {
-  static define = {
+class ViewModel extends ObservableObject {
+  static props = {
     header: headerView
   };
 }
@@ -185,13 +185,13 @@ class ViewModel extends DefineObject {
 
 ### DefinitionObject
 
-Define a property through a [can-define-object/object.types.definitionObject]. This allows you define several different behaviors (as shown in the sidebar).
+Define a property through a [can-observable-object/object.types.definitionObject]. This allows you define several different behaviors (as shown in the sidebar).
 
 ```js
-import { DefineObject, type } from "can/everything";
+import { ObservableObject, type } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     age: {
       type: type.convert(Number),
       default: 1

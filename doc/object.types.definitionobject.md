@@ -1,5 +1,5 @@
-@typedef {Object|Constructor|can-type.typeobject} can-define-object/object.types.definitionObject DefinitionObject
-@parent can-define-object/object.types
+@typedef {Object|Constructor|can-type.typeobject} can-observable-object/object.types.definitionObject DefinitionObject
+@parent can-observable-object/object.types
 
 Defines the type, initial value, and get, set, and serialize behavior for an
 observable property.  These behaviors can be specified with as an `Object`,
@@ -7,7 +7,7 @@ observable property.  These behaviors can be specified with as an `Object`,
 
 @type {Object} Defines multiple behaviors for a single property.
 
-Properties inside of [can-define-object/object.static.define] can be defined in any of the following ways:
+Properties inside of [can-observable-object/object.static.props] can be defined in any of the following ways:
 
 ```js
 {
@@ -35,13 +35,13 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
 }
 ```
 
-@option {can-define-object/define/default} default Specifies the initial value of the property.
+@option {can-observable-object/define/default} default Specifies the initial value of the property.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class ViewModel extends DefineObject {
-    static define = {
+  class ViewModel extends ObservableObject {
+    static props = {
       count: {
         default: 0
       },
@@ -57,13 +57,13 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
   ```
   @codepen
 
-@option {can-define-object/define/get-default} default Specifies the initial value of the property by defining a function.
+@option {can-observable-object/define/get-default} default Specifies the initial value of the property by defining a function.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       address: {
         get default() {
           return { city: "Chicago", state: "IL" };
@@ -77,13 +77,13 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
   ```
   @codepen
 
-@option {can-define-object/define/type} type Specifies the type of the property. The type can be specified as either a constructor function or a [can-type.typeobject] like those created with [can-type].
+@option {can-observable-object/define/type} type Specifies the type of the property. The type can be specified as either a constructor function or a [can-type.typeobject] like those created with [can-type].
 
   ```js
-  import { DefineObject, DefineArray, type } from "can/everything";
+  import { ObservableObject, DefineArray, type } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       age: Number,
       hobbies: type.convert(DefineArray)
     };
@@ -94,13 +94,13 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
   ```
   @codepen
 
-@option {can-define-object/define/get} get A function that specifies how the value is retrieved.  The get function is converted to an [can-observation].  It should derive its value from other values on the object. The following defines a `page` getter that reads from an object's offset and limit:
+@option {can-observable-object/define/get} get A function that specifies how the value is retrieved.  The get function is converted to an [can-observation].  It should derive its value from other values on the object. The following defines a `page` getter that reads from an object's offset and limit:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Book extends DefineObject {
-    static define = {
+  class Book extends ObservableObject {
+    static props = {
       offset: Number,
       limit: Number,
       page: {
@@ -119,13 +119,13 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
 
   A `get` definition makes the property __computed__ which means it will not be enumerable by default.
 
-@option {can-define-object/define/value} value A function that listens to events and resolves the value of the property.  This should be used when [can-define-object/define/value] is unable to model the right behavior. The following counts the number of times the `page` property changes:
+@option {can-observable-object/define/value} value A function that listens to events and resolves the value of the property.  This should be used when [can-observable-object/define/value] is unable to model the right behavior. The following counts the number of times the `page` property changes:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Book extends DefineObject {
-    static define = {
+  class Book extends ObservableObject {
+    static props = {
       page: Number,
       pageChangeCount: {
         value({ listenTo, resolve }) {
@@ -153,13 +153,13 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
 
   A `value` definition makes the property __computed__ which means it will not be enumerable by default.
 
-@option {can-define-object/define/set} set A set function that specifies what should happen when a property is set. `set` is called with the result of `type`. The following defines a `page` setter that updates the map's offset:
+@option {can-observable-object/define/set} set A set function that specifies what should happen when a property is set. `set` is called with the result of `type`. The following defines a `page` setter that updates the map's offset:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Book extends DefineObject {
-    static define = {
+  class Book extends ObservableObject {
+    static props = {
       offset: Number,
       limit: Number,
       page: {
@@ -176,17 +176,17 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
   ```
   @codepen
 
-@option {can-define-object/define/serialize} serialize Specifies the behavior of the property when serialize is called.
+@option {can-observable-object/define/serialize} serialize Specifies the behavior of the property when serialize is called.
 
   By default, serialize does not include computed values. Properties with a `get` definition
   are computed and therefore are not added to the result.  Non-computed properties values are
   serialized if possible and added to the result.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Todo extends DefineObject {
-    static define = {
+  class Todo extends ObservableObject {
+    static props = {
       date: {
         type: Date,
         serialize( value ) {
@@ -201,13 +201,13 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
   ```
   @codepen
 
-@option {can-define-object/define/identity} identity Specifies the property that uniquely identifies instances of the type.
+@option {can-observable-object/define/identity} identity Specifies the property that uniquely identifies instances of the type.
 
   ```js
-  import { DefineObject , Reflect } from "can";
+  import { ObservableObject , Reflect } from "can";
 
-  class Grade extends DefineObject {
-    static define = {
+  class Grade extends ObservableObject {
+    static props = {
       classId: {
         type: Number,
         identity: true
@@ -236,10 +236,10 @@ Properties inside of [can-define-object/object.static.define] can be defined in 
 @type {can-type.typeobject} Define the property using a [can-type.typeobject] as provided by [can-type].
 
   ```js
-  import { DefineObject, type } from "can/everything";
+  import { ObservableObject, type } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       age: type.convert(Number)
     };
   }
@@ -258,7 +258,7 @@ get converted to a `DefinitionObject` as follows:
 
 
 ```js
-class extends DefineObject {
+class extends ObservableObject {
   propertyA: {},                   // -> DefinitionObject
   propertyB: String,               // -> {type: String}
   propertyC: type.check(Number)    // -> TypeObject

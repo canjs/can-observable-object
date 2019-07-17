@@ -1,16 +1,16 @@
-@property can-define-object/object.static.propertyDefaults propertyDefaults
-@parent can-define-object/object.static
+@property can-observable-object/object.static.propertyDefaults propertyDefaults
+@parent can-observable-object/object.static
 
 @description Specify default behaviors for properties.
 
 @signature `static propertyDefaults = PROPDEFINITION`
 
-Specify default values using a [can-define-object/object.types.definitionObject] object.
+Specify default values using a [can-observable-object/object.types.definitionObject] object.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class RouteData extends DefineObject {
+class RouteData extends ObservableObject {
   static propertyDefaults = {
     type: String,
     enumerable: false
@@ -25,18 +25,18 @@ for(let prop in rd) {
 }
 ```
 
-The above specifies a RouteData type whose properties default to a strictly typed `String` and are [can-define-object/define/enumerable non-enumerable].
+The above specifies a RouteData type whose properties default to a strictly typed `String` and are [can-observable-object/define/enumerable non-enumerable].
 
 @signature `static propertyDefaults = PROPERTY`
 
-propertyDefaults can be specified using any of the methods specified by the [can-define-object/object.types.property property type].
+propertyDefaults can be specified using any of the methods specified by the [can-observable-object/object.types.property property type].
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
+class Person extends ObservableObject {
   static propertyDefaults = String;
 }
 ```
 
-The above specifies all properties to default to being a strictly defined `String`. See [can-define-object/object.types.property] for other possible values.
+The above specifies all properties to default to being a strictly defined `String`. See [can-observable-object/object.types.property] for other possible values.

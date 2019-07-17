@@ -1,14 +1,14 @@
-@property {Boolean} can-define-object/object.static.seal seal
-@parent can-define-object/object.static
+@property {Boolean} can-observable-object/object.static.seal seal
+@parent can-observable-object/object.static
 
 @description Defines if instances of the map should be [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal) in development.
 
-@option {Boolean} If `true`, in development, instances of this object will be [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal). In  [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) errors will be thrown when undefined properties are set. By default DefineObjects are not sealed.
+@option {Boolean} If `true`, in development, instances of this object will be [sealed](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal). In  [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) errors will be thrown when undefined properties are set. By default ObservableObjects are not sealed.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Person extends DefineObject {
+  class Person extends ObservableObject {
     static seal = true;
   }
 
@@ -22,12 +22,12 @@
   ```
   @codepen
 
-  If `false`, the object will not be sealed. This is the default behavior of DefineObjects.
+  If `false`, the object will not be sealed. This is the default behavior of ObservableObjects.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  const person = new DefineObject();
+  const person = new ObservableObject();
   person.first = "Ada";
   person.last = "Lovelace";
 

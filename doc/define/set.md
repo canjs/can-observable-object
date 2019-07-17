@@ -1,5 +1,5 @@
-@property can-define-object/define/set set
-@parent can-define-object/object.behaviors
+@property can-observable-object/define/set set
+@parent can-observable-object/object.behaviors
 
 @description
 
@@ -8,7 +8,7 @@ Specify what happens when a property value is set.
 @signature `set( [newVal], [current] )`
 
 
-> NOTE: Instead of using `set` to set the values of other properties, use the [can-define-object/define/value] behavior.
+> NOTE: Instead of using `set` to set the values of other properties, use the [can-observable-object/define/value] behavior.
 
 A set function defines the behavior of what happens when a value is set on an
 instance. It is typically used to:
@@ -36,7 +36,7 @@ behaves differently than:
 }
 ```
 
-@param {*} [newVal] The [can-define-object/define/type type function] coerced value the user intends to set on the
+@param {*} [newVal] The [can-observable-object/define/type type function] coerced value the user intends to set on the
 instance.
 
 @param {*} current The current value of the property.
@@ -66,10 +66,10 @@ The following makes setting a `page` property update the `offset`:
 
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Pages extends DefineObject {
-  static define = {
+class Pages extends ObservableObject {
+  static props = {
     limit: 5,
     offset: 0,
 
@@ -90,10 +90,10 @@ console.log( book.offset ); //-> 45
 The following makes changing `makeId` un-define the `modelId` property:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Car extends DefineObject {
-  static define = {
+class Car extends ObservableObject {
+  static props = {
     modelId: Number,
     makeId: {
       set( newVal ) {
@@ -123,10 +123,10 @@ When a setter returns `undefined`, its behavior changes depending on the number 
 With 0 arguments, the original set value is set on the attribute.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class MyMap extends DefineObject {
-  static define = {
+class MyMap extends ObservableObject {
+  static props = {
     prop: {
       set() {
 
@@ -144,10 +144,10 @@ console.log( map.prop ); //-> "foo"
 With 1 argument, an `undefined` return value will set the property to `undefined`.  
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class MyMap extends DefineObject {
-  static define = {
+class MyMap extends ObservableObject {
+  static props = {
     prop: {
       set( newVal ) {
 
@@ -166,13 +166,13 @@ console.log( map.prop ); //-> undefined
 
 A set function provides a useful hook for performing side effect logic as a certain property is being changed.
 
-In the example below, Paginator DefineObject includes a `page` property, which derives its value entirely from other properties (limit and offset).  If something tries to set the `page` directly, the set method will set the value of `offset`:
+In the example below, Paginator ObservableObject includes a `page` property, which derives its value entirely from other properties (limit and offset).  If something tries to set the `page` directly, the set method will set the value of `offset`:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Paginate extends DefineObject {
-  static define = {
+class Paginate extends ObservableObject {
+  static props = {
     limit: Number,
     offset: Number,
 
@@ -199,10 +199,10 @@ console.log( p.page ); //-> 2
 By default, if a value returned from a setter is an object the effect will be to replace the property with the new object completely.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Contact extends DefineObject {
-  static define = {
+class Contact extends ObservableObject {
+  static props = {
     info: {
       set( newVal ) {
         return newVal;
@@ -226,10 +226,10 @@ console.log( info === alice.info ); // -> false
 In contrast, you can merge properties with:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Contact extends DefineObject {
-  static define = {
+class Contact extends ObservableObject {
+  static props = {
     info: {
       set( newVal ) {
         if ( this.info ) {
@@ -260,13 +260,13 @@ By default, calls to `set` methods are wrapped in a call to [can-queues.batch.st
 
 ## Used with type
 
-When providing __set_ along with [can-define-object/define/type], the type converter runs before set. This means you don't have to worry about handling the raw value being set.
+When providing __set_ along with [can-observable-object/define/type], the type converter runs before set. This means you don't have to worry about handling the raw value being set.
 
 ```js
-import { DefineObject, type } from "can/everything";
+import { ObservableObject, type } from "can/everything";
 
-class Counter extends DefineObject {
-  static define = {
+class Counter extends ObservableObject {
+  static props = {
     max: 100,
     count: {
       type: type.convert(Number),

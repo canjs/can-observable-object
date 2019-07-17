@@ -1,26 +1,26 @@
-@module {function} can-define-object
+@module {function} can-observable-object
 @parent can-observables
 @collection can-ecosystem
-@group can-define-object/object.behaviors 0 behaviors
-@group can-define-object/object.static 1 static
-@group can-define-object/object.prototype 2 prototype
-@group can-define-object/object.types 3 types
-@alias can.DefineObject
+@group can-observable-object/object.behaviors 0 behaviors
+@group can-observable-object/object.static 1 static
+@group can-observable-object/object.prototype 2 prototype
+@group can-observable-object/object.types 3 types
+@alias can.ObservableObject
 @package ../package.json
 @outline 2
 @templateRender true
 
 @description Create observable objects used to manage state in explicitly defined ways.
 
-@signature `class extends DefineObject`
+@signature `class extends ObservableObject`
 
-  Extending `DefineObject` creates a new class using the class body to configure [can-define-object/object.static.define defines], methods, getters, and setters.
+  Extending `ObservableObject` creates a new class using the class body to configure [can-observable-object/object.static.props props], methods, getters, and setters.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Scientist extends DefineObject {
-    static define = {
+  class Scientist extends ObservableObject {
+    static props = {
       name: String,
       occupation: String
     };
@@ -39,18 +39,18 @@
   ```
   @codepen
 
-  Use extends to create classes for models, ViewModels, and [can-stache-define-element custom elements].
+  Use extends to create classes for models, ViewModels, and [can-stache-element custom elements].
 
   @return {Constructor} An extended class that can be instantiated using `new`.
 
-@signature `new DefineObject([props])`
+@signature `new ObservableObject([props])`
 
-  Calling `new DefineObject(props)` creates a new instance of DefineObject or an extended DefineObject. Then, `new DefineObject(props)` assigns every property on `props` to the new instance.  If props are passed that are not defined already, those properties are set on the instance.  If the instance should be [can-define-object/object.static.seal sealed], it is sealed.
+  Calling `new ObservableObject(props)` creates a new instance of ObservableObject or an extended ObservableObject. Then, `new ObservableObject(props)` assigns every property on `props` to the new instance.  If props are passed that are not defined already, those properties are set on the instance.  If the instance should be [can-observable-object/object.static.seal sealed], it is sealed.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  const person = new DefineObject( {
+  const person = new ObservableObject( {
 		first: "Justin",
 		last: "Meyer"
   } );
@@ -59,16 +59,16 @@
   ```
   @codepen
 
-  Custom `DefineObject` types, with special properties and behaviors, can be defined with the [extends signature](#classextendsDefineObject).
+  Custom `ObservableObject` types, with special properties and behaviors, can be defined with the [extends signature](#classextendsObservableObject).
 
   @param {Object} [props] Properties and values to seed the map with.
-  @return {can-define-object} An instance of `DefineObject` with the properties from _props_.
+  @return {can-observable-object} An instance of `ObservableObject` with the properties from _props_.
 
 @body
 
 ## Mixed-in instance methods and properties
 
-Instances of `DefineObject` have all methods and properties from
+Instances of `ObservableObject` have all methods and properties from
 [can-event-queue/map/map]:
 
 {{#each (getChildren [can-event-queue/map/map])}}
@@ -77,10 +77,10 @@ Instances of `DefineObject` have all methods and properties from
 Example:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class MyType extends DefineObject {
-  static define = {
+class MyType extends ObservableObject {
+  static props = {
     prop: String
   };
 }
@@ -99,7 +99,7 @@ myInstance.prop = "NEW VALUE";
 
 ## Mixed-in type methods and properties
 
-Extended `DefineObject` classes have all methods and properties from
+Extended `ObservableObject` classes have all methods and properties from
 [can-event-queue/type/type]:
 
 {{#each (getChildren [can-event-queue/type/type])}}
@@ -108,10 +108,10 @@ Extended `DefineObject` classes have all methods and properties from
 Example:
 
 ```js
-import { DefineObject, Reflect as canReflect } from "can/everything";
+import { ObservableObject, Reflect as canReflect } from "can/everything";
 
-class MyType extends DefineObject {
-  static define = {
+class MyType extends ObservableObject {
+  static props = {
     prop: String
   };
 }
@@ -127,15 +127,15 @@ instance.prop = "VALUE";
 
 ## Overview
 
-`can-define-object` is used to create easily extensible observable types with well defined behavior.
+`can-observable-object` is used to create easily extensible observable types with well defined behavior.
 
 For example, a `Todo` type, with a `name` property, `completed` property, and a `toggle` method, might be defined like:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Todo extends DefineObject {
-  static define = {
+class Todo extends ObservableObject {
+  static props = {
     name: String,
     completed: false // default value
   };
@@ -153,7 +153,7 @@ console.log( myTodo ); //-> {name: "my first todo!", completed: true}
 
 The _Object_ set on `static define` defines the properties that will be
 on _instances_ of a `Todo`.  There are a lot of ways to define properties.  The
-[can-define-object/object.types.definitionObject] type lists them all.  Here, we define:
+[can-observable-object/object.types.definitionObject] type lists them all.  Here, we define:
 
  - `name` as a property that will be type checked as a `String`.
  - `completed` as a property that will be type check as a `Boolean`
@@ -165,10 +165,10 @@ This also defines a `toggle` method that will be available on _instances_ of `To
 calling `new Todo()` as follows:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Todo extends DefineObject {
-  static define = {
+class Todo extends ObservableObject {
+  static props = {
     name: String,
     completed: false
   };
@@ -190,15 +190,15 @@ console.log( myTodo.completed ); //-> true
 
 ## Typed properties
 
-DefineObject uses [can-type] to define typing rules for properties. It supports both strict typing (type checking) and loose typing (type conversion).
+ObservableObject uses [can-type] to define typing rules for properties. It supports both strict typing (type checking) and loose typing (type conversion).
 
-If a property is specified as a specific type, DefineObject will perform type checking. This means that if the `first` property in the example below is set to any value that is not a string, an error will be thrown:
+If a property is specified as a specific type, ObservableObject will perform type checking. This means that if the `first` property in the example below is set to any value that is not a string, an error will be thrown:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String
   };
 }
@@ -213,10 +213,10 @@ person.first = false; // -> Uncaught Error: Type value 'false' is not of type St
 [can-type] also supports functions like [can-type/maybe type.maybe] and [can-type/convert type.convert] for handling other typing options. In the example below, `maybeNumber` can be a number or `null` or `undefined` and `alwaysString` will be converted to a string no matter what value is passed.
 
 ```js
-import { DefineObject, type } from "can/everything";
+import { ObservableObject, type } from "can/everything";
 
-class Obj extends DefineObject {
-  static define = {
+class Obj extends ObservableObject {
+  static props = {
     maybeNumber: type.maybe(Number),
     alwaysString: type.convert(String)
   };
@@ -240,15 +240,15 @@ To see all the ways types can be defined, check out the [can-type can-type docs]
 
 ## Declarative properties
 
-Arguably `can-define-object`'s most important ability is its support of declarative properties
+Arguably `can-observable-object`'s most important ability is its support of declarative properties
 that functionally derive their value from other property values.  This is done by
-defining [can-define-object/define/get getter] properties like `fullName` as follows:
+defining [can-observable-object/define/get getter] properties like `fullName` as follows:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String,
     last: String
   };
@@ -271,10 +271,10 @@ console.log(person.fullName); //-> "Justin Meyer"
 This property can be bound to like any other property:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String,
     last: String
   };
@@ -304,10 +304,10 @@ the value of the `getter` is cached and only updates when one of its source
 observables change.  For example:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String,
     last: String,
   };
@@ -337,13 +337,13 @@ console.log( hero.fullName ); // logs "Bionic Man"
 ### Asynchronous properties
 
 Properties can also be asynchronous using `async(resolve)`.  These are very useful when you have a type
-that requires data from the server. For example, a DefineObject might take a `todoId` value, and want to make a `todo` property available:
+that requires data from the server. For example, a ObservableObject might take a `todoId` value, and want to make a `todo` property available:
 
 ```js
-import { DefineObject, ajax } from "can/everything";
+import { ObservableObject, ajax } from "can/everything";
 
-class Todo extends DefineObject {
-  static define = {
+class Todo extends ObservableObject {
+  static props = {
     todoId: Number,
 
     todo: {
@@ -361,10 +361,10 @@ your template will automatically bind on the `todo` property.  But to use it in 
 look like:
 
 ```js
-import { DefineObject, ajax, fixture } from "can/everything";
+import { ObservableObject, ajax, fixture } from "can/everything";
 
-class TodoViewModel extends DefineObject {
-  static define = {
+class TodoViewModel extends ObservableObject {
+  static props = {
     todoId: Number,
 
     todo: {
@@ -392,20 +392,20 @@ console.log(todoVM.todo) //-> undefined
 ### Getter limitations
 
 There's some functionality that a getter or an asynchronous property can not describe
-declaratively.  For these situations, you can use [can-define-object/define/set] or
-even better, use [can-define-object/define/value].
+declaratively.  For these situations, you can use [can-observable-object/define/set] or
+even better, use [can-observable-object/define/value].
 
 For example, consider a __state__ and __city__ locator where you pick a United States
 __state__ like _Illinois_ and then a __city__ like _Chicago_.  In this example,
 we want to clear the choice of __city__ whenever the __state__ changes.
 
-This can be implemented with [can-define-object/define/set] like:
+This can be implemented with [can-observable-object/define/set] like:
 
 ```js
-import { DefineObject, type } from "can/everything";
+import { ObservableObject, type } from "can/everything";
 
-class Locator extends DefineObject {
-  static define = {
+class Locator extends ObservableObject {
+  static props = {
     state: {
       type: String,
       set() {
@@ -429,14 +429,14 @@ console.log( locator.city ); //-> null;
 The problem with this code is that it relies on side effects to manage the behavior of
 `city`.  If someone wants to understand how `city` behaves, they might have to search all of the code for the Locator class.
 
-The [can-define-object/define/value] behavior allows you to consolidate the
-behavior of a property to a single place.  For example, the following implements `Locator` with [can-define-object/define/value]:
+The [can-observable-object/define/value] behavior allows you to consolidate the
+behavior of a property to a single place.  For example, the following implements `Locator` with [can-observable-object/define/value]:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Locator extends DefineObject {
-  static define = {
+class Locator extends ObservableObject {
+  static props = {
     state: String,
 
     city: {
@@ -467,18 +467,18 @@ console.log( locator.city ); //-> null
 @codepen
 
 While [functional reactive programming](https://en.wikipedia.org/wiki/Functional_reactive_programming) (FRP) can take time to master at first, once you do, your code will be much easier to understand and
-debug. The [can-define-object/define/value] behavior supports the basics of FRP programming - the ability to listen events and changes in other properties and `resolve` the property to a new value.
+debug. The [can-observable-object/define/value] behavior supports the basics of FRP programming - the ability to listen events and changes in other properties and `resolve` the property to a new value.
 
 ## Sealed instances and strict mode
 
-By default, `DefineObject` instances are __not__ [can-define-object/object.static.seal sealed].  This
+By default, `ObservableObject` instances are __not__ [can-observable-object/object.static.seal sealed].  This
 means that setting properties that are not defined when the constructor is defined will be set on those instances anyway.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class MyType extends DefineObject {
-  static define = {
+class MyType extends ObservableObject {
+  static props = {
     myProp: String
   };
 }
@@ -489,13 +489,13 @@ myType.otherProp = "value"; // no error thrown
 ```
 @codepen
 
-Setting the extended DefineObject to be sealed will instead result in throwing an error in files that are in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode). For example:
+Setting the extended ObservableObject to be sealed will instead result in throwing an error in files that are in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode). For example:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class MyType extends DefineObject {
-  static define = {
+class MyType extends ObservableObject {
+  static props = {
     myProp: String
   };
 

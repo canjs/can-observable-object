@@ -1,8 +1,8 @@
-# can-define-object
+# can-observable-object
 
-[![Build Status](https://travis-ci.org/DoneJS/can-define-object.svg?branch=master)](https://travis-ci.org/DoneJS/can-define-object) [![Greenkeeper badge](https://badges.greenkeeper.io/canjs/can-define-object.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/DoneJS/can-observable-object.svg?branch=master)](https://travis-ci.org/DoneJS/can-observable-object) [![Greenkeeper badge](https://badges.greenkeeper.io/canjs/can-observable-object.svg)](https://greenkeeper.io/)
 
-The DefineObject
+The ObservableObject
 
 ## Usage
 
@@ -11,16 +11,16 @@ The DefineObject
 With StealJS, you can import this module directly in a template that is autorendered:
 
 ```js
-import plugin from 'can-define-object';
+import plugin from 'can-observable-object';
 ```
 
 ### CommonJS use
 
-Use `require` to load `can-define-object` and everything else
-needed to create a template that uses `can-define-object`:
+Use `require` to load `can-observable-object` and everything else
+needed to create a template that uses `can-observable-object`:
 
 ```js
-var plugin = require("can-define-object");
+var plugin = require("can-observable-object");
 ```
 
 ### Standalone use
@@ -28,5 +28,5 @@ var plugin = require("can-define-object");
 Load the `global` version of the plugin:
 
 ```html
-<script src='./node_modules/can-define-object/dist/global/can-define-object.js'></script>
+<script src='./node_modules/can-observable-object/dist/global/can-observable-object.js'></script>
 ```

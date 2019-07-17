@@ -1,5 +1,5 @@
-@property can-define-object/define/value value
-@parent can-define-object/object.behaviors
+@property can-observable-object/define/value value
+@parent can-observable-object/object.behaviors
 @description
 
 Specify the behavior of a property by listening to changes in other properties.
@@ -7,8 +7,8 @@ Specify the behavior of a property by listening to changes in other properties.
 @signature `value(prop)`
 
   The `value` behavior is used to compose a property value from events dispatched
-  by other properties on the map. It's similar to [can-define-object/define/get], but can
-  be used to build property behaviors that [can-define-object/define/get] can not provide.
+  by other properties on the map. It's similar to [can-observable-object/define/get], but can
+  be used to build property behaviors that [can-observable-object/define/get] can not provide.
 
   `value` enables techniques very similar to using event streams and functional
   reactive programming. Use `prop.listenTo` to listen to events dispatched on
@@ -17,10 +17,10 @@ Specify the behavior of a property by listening to changes in other properties.
   For example, the following counts the number of times the `name` property changed:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       name: String,
       nameChangeCount: {
         value({ listenTo, resolve }) {
@@ -46,11 +46,11 @@ Specify the behavior of a property by listening to changes in other properties.
   If the property defined by `value` is unbound, the `value` function will be called each time. Use `prop.resolve` synchronously
   to provide a value.
 
-  [can-define-object/define/type], [can-define-object/define/default], [can-define-object/define/get], and [can-define-object/define/set] behaviors are ignored when `value` is present.
+  [can-observable-object/define/type], [can-observable-object/define/default], [can-observable-object/define/get], and [can-observable-object/define/set] behaviors are ignored when `value` is present.
 
   `value` properties are not enumerable by default.
 
-  @param {can-define-object/define/valueOptions} [prop] An object of methods and values used to specify the property
+  @param {can-observable-object/define/valueOptions} [prop] An object of methods and values used to specify the property
   behavior:
 
   - __prop.resolve(value)__ `{function(Any)}` Sets the value of this property as `value`. During a [can-queues.batch.start batch],
@@ -80,7 +80,7 @@ Specify the behavior of a property by listening to changes in other properties.
     ```
 
   - __prop.stopListening(bindTarget, event, handler, queue)__ `{function(Any,String,Fuction,String)}`  A function that removes bindings
-    registered by the `prop.listenTo` argument.  This `prop.stopListening` method is very similar to the [can-event-queue/map/map.stopListening] method available on [can-define-object].  It differs only that it:
+    registered by the `prop.listenTo` argument.  This `prop.stopListening` method is very similar to the [can-event-queue/map/map.stopListening] method available on [can-observable-object].  It differs only that it:
 
     - defaults to unbinding within the [can-queues.notifyQueue].
     - unbinds saved bindings by `prop.listenTo`.
@@ -115,10 +115,10 @@ Specify the behavior of a property by listening to changes in other properties.
     normal object property that can be get or set:
 
     ```js
-    import { DefineObject } from "can/everything";
+    import { ObservableObject } from "can/everything";
 
-    class Example extends DefineObject {
-      static define = {
+    class Example extends ObservableObject {
+      static props = {
         property: {
           value( { lastSet, listenTo, resolve } ) {
 
@@ -148,10 +148,10 @@ Specify the behavior of a property by listening to changes in other properties.
   is returned to clear the interval when the property is returned:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Timer extends DefineObject {
-    static define = {
+  class Timer extends ObservableObject {
+    static props = {
       time: {
         value( { resolve } ) {
           resolve( new Date() );
@@ -185,19 +185,19 @@ Specify the behavior of a property by listening to changes in other properties.
 
 ## Use
 
-The `value` behavior should be used where the [can-define-object/define/get] behavior can
+The `value` behavior should be used where the [can-observable-object/define/get] behavior can
 not derive a property value from instantaneous values.  This often happens in situations
 where the fact that something changes needs to saved in the state of the application.
 
-Our next example shows how [can-define-object/define/get] should be used with the
+Our next example shows how [can-observable-object/define/get] should be used with the
 `fullName` property.  The following creates a `fullName` property
 that derives its value from the instantaneous `first` and `last` values:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String,
     last: String
   };
@@ -212,17 +212,17 @@ console.log( p.fullName ); //-> "John Smith"
 ```
 @codepen
 
-[can-define-object/define/get] is great for these types of values. But [can-define-object/define/get]
+[can-observable-object/define/get] is great for these types of values. But [can-observable-object/define/get]
 is unable to derive property values based on the change of values or the
 passage of time.
 
 The following `fullNameChangeCount` increments every time `fullName` changes:
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class Person extends DefineObject {
-  static define = {
+class Person extends ObservableObject {
+  static props = {
     first: String,
     last: String,
     fullName: {

@@ -1,13 +1,13 @@
-@typedef {PrimitiveValue|PrimitiveConstructor|Constructor|TypeObject|Function|DefinitionObject} can-define-object/object.types.property Property
-@parent can-define-object/object.types
+@typedef {PrimitiveValue|PrimitiveConstructor|Constructor|TypeObject|Function|DefinitionObject} can-observable-object/object.types.property Property
+@parent can-observable-object/object.types
 
 @type {PrimitiveValue} Specify a property with a default primitive value. Using this signature will result in strict type checking being applied to this property.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       age: 72
     };
   }
@@ -22,10 +22,10 @@
 @type {PrimitiveConstructor} Specify a property by defining its type as a primitive constructor. This can be `String`, `Number`, or `Boolean`. Using this signature results in strict type checking for this property.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       age: Number
     };
   }
@@ -39,17 +39,17 @@
   ```
   @codepen
 
-@type {Constructor} Specify a property by defining its type as a constructor. This can be any constructor function, such as another [can-define-object DefineObject], builtins like `Date`, or plain JavaScript constructor functions.
+@type {Constructor} Specify a property by defining its type as a constructor. This can be any constructor function, such as another [can-observable-object ObservableObject], builtins like `Date`, or plain JavaScript constructor functions.
 
   Specify a constructor function as a property's value will result in strict type checking for this property.
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class Occupation extends DefineObject {}
+  class Occupation extends ObservableObject {}
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       occupation: Occupation,
       birthday: Date
     };
@@ -67,10 +67,10 @@
 @type {TypeObject} Specify a property as a special TypeObject. Most of the time you'll use this in conjunction with [can-type] to specify a type.
 
   ```js
-  import { DefineObject, type } from "can/everything";
+  import { ObservableObject, type } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       first: type.check(String),
       last: type.check(String),
       middle: type.maybe(String)
@@ -104,7 +104,7 @@
 @type {Function} Specify a property as a function sets the property to `type: Function` and uses the provided function as the default value. A use-case for this signature is to have a [can-stache] renderer as a default template while allowing consumers of your component to provide an alternative renderer.
 
   ```js
-  import { DefineObject, stache } from "can/everything";
+  import { ObservableObject, stache } from "can/everything";
 
   // This is a function
   const headerView = stache(`
@@ -113,20 +113,20 @@
     </header>
   `);
 
-  class ViewModel extends DefineObject {
-    static define = {
+  class ViewModel extends ObservableObject {
+    static props = {
       header: headerView
     };
   }
   ```
 
-@type {DefinitionObject} Define a property through a [can-define-object/object.types.definitionObject]. This allows you define several different behaviors (as shown in the sidebar).
+@type {DefinitionObject} Define a property through a [can-observable-object/object.types.definitionObject]. This allows you define several different behaviors (as shown in the sidebar).
 
   ```js
-  import { DefineObject, type } from "can/everything";
+  import { ObservableObject, type } from "can/everything";
 
-  class Person extends DefineObject {
-    static define = {
+  class Person extends ObservableObject {
+    static props = {
       age: {
         type: type.convert(Number),
         default: 1

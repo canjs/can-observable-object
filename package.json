@@ -1,16 +1,16 @@
 {
-  "name": "can-define-object",
+  "name": "can-observable-object",
   "version": "0.1.6",
-  "description": "The DefineObject",
-  "homepage": "https://github.com/canjs/can-define-object",
+  "description": "The ObservableObject",
+  "homepage": "https://github.com/canjs/can-observable-object",
   "repository": {
     "type": "git",
-    "url": "git://github.com/DoneJS/can-define-object.git"
+    "url": "git://github.com/DoneJS/can-observable-object.git"
   },
   "author": {
     "name": "DoneJS Core Team",
     "email": "core@donejs.com",
-    "url": "https://github.com/canjs/can-define-object"
+    "url": "https://github.com/canjs/can-observable-object"
   },
   "scripts": {
     "compile-to-es5": "babel src --out-dir dist",
@@ -27,16 +27,16 @@
     "build": "node build.js",
     "develop": "done-serve --static --develop --port 8080"
   },
-  "main": "dist/can-define-object.js",
+  "main": "dist/can-observable-object.js",
   "keywords": [
     "canjs",
     "donejs-plugin"
   ],
   "steal": {
-    "main": "src/can-define-object.js"
+    "main": "src/can-observable-object.js"
   },
   "dependencies": {
-    "can-define-mixin": "^0.3.0"
+    "can-observable-mixin": "^0.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

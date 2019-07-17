@@ -1,9 +1,0 @@
-{
-  "generator-donejs": {
-    "promptValues": {
-      "authorName": "DoneJS Core Team",
-      "authorEmail": "core@donejs.com",
-      "authorUrl": "https://github.com/canjs/can-define-object"
-    }
-  }
-}

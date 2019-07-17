@@ -1,22 +1,22 @@
-@property can-define-object/define/enumerable enumerable
-@parent can-define-object/object.behaviors
+@property can-observable-object/define/enumerable enumerable
+@parent can-observable-object/object.behaviors
 
 @description enumerable
 
-Defines whether the property is [enumerable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties) and is serialized by [can-define-object/define/serialize .serialize()].
+Defines whether the property is [enumerable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties) and is serialized by [can-observable-object/define/serialize .serialize()].
 
 @signature `Boolean`
 
   Specifies if the property should be enumerable.  By default, all properties except for
-  ones with defined [can-define-object/define/get getters], [can-define-object/define/async], and [can-define-object/define/value] are serialized.
+  ones with defined [can-observable-object/define/get getters], [can-observable-object/define/async], and [can-observable-object/define/value] are serialized.
 
   You can prevent a property from being serialized like:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class MyMap extends DefineObject {
-    static define = {
+  class MyMap extends ObservableObject {
+    static props = {
       propertyName: {
         enumerable: false
       },
@@ -30,13 +30,13 @@ Defines whether the property is [enumerable](https://developer.mozilla.org/en-US
   ```
   @codepen
 
-  Make a [can-define-object/define/get getter] property part of the serialized result like:
+  Make a [can-observable-object/define/get getter] property part of the serialized result like:
 
   ```js
-  import { DefineObject } from "can/everything";
+  import { ObservableObject } from "can/everything";
 
-  class MyMap extends DefineObject {
-    static define = {
+  class MyMap extends ObservableObject {
+    static props = {
       propertyName: {
         get() {
           return "test";

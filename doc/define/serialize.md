@@ -1,5 +1,5 @@
-@property can-define-object/define/serialize serialize
-@parent can-define-object/object.behaviors
+@property can-observable-object/define/serialize serialize
+@parent can-observable-object/object.behaviors
 
 @description serialize
 
@@ -10,10 +10,10 @@ Defines custom serialization behavior for a property.
   Specifies the serialized value of a property.
 
   ```js
-  import { DefineObject } from "can";
+  import { ObservableObject } from "can";
 
-  class MyMap extends DefineObject {
-    static define = {
+  class MyMap extends ObservableObject {
+    static props = {
       example: {
         serialize( currentValue, propertyName ) {
           console.log( currentValue ); //-> "Value"
@@ -40,7 +40,7 @@ Defines custom serialization behavior for a property.
 
 ## Use
 
-[can-define-object/define/serialize] is useful for serializing an instance into
+[can-observable-object/define/serialize] is useful for serializing an instance into
 a more JSON-friendly form.  This can be used for many reasons, including saving a
 [can-connect]ed instance on the server or serializing [can-route.data can-route.data]'s internal
 map for display in the hash or pushstate URL.
@@ -55,10 +55,10 @@ The following causes a locationIds property to be serialized into
 the comma separated ID values of the location property on this instance:
 
 ```js
-import { DefineObject, DefineArray } from "can/everything";
+import { ObservableObject, DefineArray } from "can/everything";
 
-class MyMap extends DefineObject {
-  static define = {
+class MyMap extends ObservableObject {
+  static props = {
     locations: DefineArray,
     locationIds: {
       serialize() {
@@ -83,10 +83,10 @@ object.  For example, if the property numPages is not greater than zero, the fol
 won't include it in the serialized object.
 
 ```js
-import { DefineObject } from "can/everything";
+import { ObservableObject } from "can/everything";
 
-class MyBook extends DefineObject {
-  static define = {
+class MyBook extends ObservableObject {
+  static props = {
     prop: {
       serialize( num ) {
         if ( num <= 0 ) {

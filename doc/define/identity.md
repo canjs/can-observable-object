@@ -1,5 +1,5 @@
-@property {Boolean} can-define-object/define/identity identity
-@parent can-define-object/object.behaviors
+@property {Boolean} can-observable-object/define/identity identity
+@parent can-observable-object/object.behaviors
 
 Specifies that the property uniquely identifies instances of the type.
 
@@ -12,10 +12,10 @@ Specifies that the property uniquely identifies instances of the type.
   instances:
 
   ```js
-  import { DefineObject, Reflect as canReflect } from "can/everything";
+  import { ObservableObject, Reflect as canReflect } from "can/everything";
 
-  class Todo extends DefineObject {
-    static define = {
+  class Todo extends ObservableObject {
+    static props = {
       id: {
         type: Number,
         identity: true
@@ -35,10 +35,10 @@ Specifies that the property uniquely identifies instances of the type.
   are specified, a sorted JSON string is returned:
 
   ```js
-  import { DefineObject, Reflect as canReflect } from "can/everything";
+  import { ObservableObject, Reflect as canReflect } from "can/everything";
 
-  class Grade extends DefineObject {
-    static define = {
+  class Grade extends ObservableObject {
+    static props = {
       classId: {
         type: Number,
         identity: true

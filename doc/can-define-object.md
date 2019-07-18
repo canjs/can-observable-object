@@ -1,6 +1,6 @@
 @module {function} can-observable-object
 @parent can-observables
-@collection can-ecosystem
+@collection can-core
 @group can-observable-object/object.behaviors 0 behaviors
 @group can-observable-object/object.static 1 static
 @group can-observable-object/object.prototype 2 prototype

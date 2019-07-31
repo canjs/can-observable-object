@@ -36,7 +36,7 @@
     "main": "src/can-observable-object.js"
   },
   "dependencies": {
-    "can-observable-mixin": "^0.4.0"
+    "can-observable-mixin": "canjs/can-observable-mixin#major"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

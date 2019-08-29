@@ -17,12 +17,4 @@ let ObservableObject = class extends mixinProxy(Object) {
 ObservableObject = mixinTypeEvents(mixinMapProps(ObservableObject));
 makeDefineInstanceKey(ObservableObject);
 
-// Export a constructor function to workaround an issue where ES2015 classes
-// cannot be extended in code that's transpiled by Babel.
-function ObservableObjectConstructor() {
-	return Reflect.construct(ObservableObject, arguments, this.constructor);
-}
-ObservableObjectConstructor.prototype = Object.create(ObservableObject.prototype);
-ObservableObjectConstructor.prototype.constructor = ObservableObjectConstructor;
-
-module.exports = ObservableObjectConstructor;
+module.exports = ObservableObject;

@@ -2,8 +2,6 @@ const ObservableObject = require("./src/can-observable-object");
 const QUnit = require("steal-qunit");
 const canReflect = require("can-reflect");
 
-require("./import-steal-test");
-
 QUnit.module('can-observable-object');
 
 QUnit.test("Basics", function(assert){

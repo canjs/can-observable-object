@@ -1,6 +1,6 @@
 {
   "name": "can-observable-object",
-  "version": "0.2.0",
+  "version": "1.0.0-pre.3",
   "description": "The ObservableObject",
   "homepage": "https://github.com/canjs/can-observable-object",
   "repository": {
@@ -17,13 +17,14 @@
     "preversion": "npm test && npm run build",
     "version": "git commit -am \"Update version number\" && git checkout -b release && git add -f dist/",
     "postpublish": "git push --tags && git checkout master && git branch -D release && git push",
-    "testee": "testee test.html --browsers firefox",
+    "testee": "testee test/test.html --browsers firefox",
     "test": "npm run jshint && npm run testee",
     "jshint": "jshint ./*.js --config",
     "prepublishOnly": "npm run compile-to-es5",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
+    "release:pre": "npm version prerelease && npm publish --tag pre",
     "build": "node build.js",
     "develop": "done-serve --static --develop --port 8080"
   },
@@ -36,7 +37,7 @@
     "main": "src/can-observable-object.js"
   },
   "dependencies": {
-    "can-observable-mixin": "^0.4.0"
+    "can-observable-mixin": "^1.0.0-pre.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

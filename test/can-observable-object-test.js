@@ -1,4 +1,4 @@
-const ObservableObject = require("./src/can-observable-object");
+const ObservableObject = require("../src/can-observable-object");
 const QUnit = require("steal-qunit");
 const canReflect = require("can-reflect");
 

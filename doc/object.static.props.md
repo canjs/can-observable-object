@@ -128,7 +128,7 @@ me.birthday = "1970/3/19"; // throws
 Specify a property as a special TypeObject. Most of the time you'll use this in conjunction with [can-type] to specify a type.
 
 ```js
-import { ObservableObject } from "can/everything";
+import { ObservableObject, type } from "can/everything";
 
 class Person extends ObservableObject {
   static props = {

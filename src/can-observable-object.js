@@ -1,3 +1,4 @@
+const namespace = require("can-namespace");
 const {
 	createConstructorFunction,
 	makeDefineInstanceKey,
@@ -20,4 +21,6 @@ makeDefineInstanceKey(ObservableObject);
 
 // Export a constructor function to workaround an issue where ES2015 classes
 // cannot be extended in code that's transpiled by Babel.
-module.exports = createConstructorFunction(ObservableObject);
+module.exports = namespace.ObservableObject = createConstructorFunction(
+	ObservableObject
+);

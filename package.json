@@ -37,6 +37,7 @@
     "main": "src/can-observable-object.js"
   },
   "dependencies": {
+    "can-namespace": "^1.0.0",
     "can-observable-mixin": "^1.0.0"
   },
   "devDependencies": {

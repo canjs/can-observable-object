@@ -1,6 +1,6 @@
 {
   "name": "can-observable-object",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The ObservableObject",
   "homepage": "https://github.com/canjs/can-observable-object",
   "repository": {

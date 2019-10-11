@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "can-namespace": "^1.0.0",
-    "can-observable-mixin": "^1.0.0"
+    "can-observable-mixin": "^1.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

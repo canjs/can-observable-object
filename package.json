@@ -46,7 +46,7 @@
     "@babel/preset-env": "^7.4.5",
     "can-reflect": "^1.17.10",
     "jshint": "^2.9.1",
-    "steal": "^2.1.6",
+    "steal": "^2.2.4",
     "steal-qunit": "^2.0.0",
     "steal-tools": "^2.0.9",
     "testee": "^0.9.1"

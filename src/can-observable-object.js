@@ -13,7 +13,30 @@ let ObservableObject = class extends mixinProxy(Object) {
 		super();
 		mixins.finalizeClass(this.constructor);
 		mixins.initialize(this, props);
+		const obj = this;
+		// Define class fields observables 
+		//and return the proxy
+		return new Proxy(this, {
+			defineProperty(target, prop, descriptor) {
+				const props = target.constructor.props;
+				let value = descriptor.value;
+
+				if (!value && typeof descriptor.get === 'function') {
+					value = descriptor.get();
+				}
+
+				if (value) {
+					if (props && props[prop]) {
+						obj[prop] = value;
+						return true;
+					}
+					// Make the property observable
+					return mixins.expando(target, prop, value);
+				}
+			}
+		});
 	}
+
 };
 
 ObservableObject = mixinTypeEvents(mixinMapProps(ObservableObject));

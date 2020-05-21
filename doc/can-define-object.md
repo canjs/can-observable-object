@@ -490,24 +490,6 @@ console.log( locator.city ); //-> null
 While [functional reactive programming](https://en.wikipedia.org/wiki/Functional_reactive_programming) (FRP) can take time to master at first, once you do, your code will be much easier to understand and
 debug. The [can-observable-object/define/value] behavior supports the basics of FRP programming - the ability to listen events and changes in other properties and `resolve` the property to a new value.
 
-## Observable class fields
-
-Class fields can be used in `ObservableObject` and are observable like [object.static.props props]:
-
-```js
-class Person extends ObservableObject {
-  age = 35;
-}
-
-const me = new Person();
-me.on('age', function(ev, newVal, oldVal) {
-  console.log(newVal); // -> 38
-});
-
-me.age = 38;
-```
-
-
 ## Sealed instances and strict mode
 
 By default, `ObservableObject` instances are __not__ [can-observable-object/object.static.seal sealed].  This

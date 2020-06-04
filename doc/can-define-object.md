@@ -98,7 +98,7 @@ myInstance.prop = "NEW VALUE";
 
 #### Observable class fields
 
-`ObservableObject` [class fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Class_fields) are observables like [can-observable-object/object.static.props static props]:
+`ObservableObject` [class fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Class_fields) are also observable:
 
 
  ```js

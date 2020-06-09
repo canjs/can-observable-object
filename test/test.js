@@ -13,7 +13,5 @@ try {
 }
 
 if (supportsClassFields) {
-	//It doesn't work with require
-	//Even when change the above imports to require
-	steal.import('~/test/class-fields-test');
+	require('./class-fields-test');
 }

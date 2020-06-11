@@ -96,6 +96,27 @@ myInstance.prop = "NEW VALUE";
 ```
 @codepen
 
+#### Observable class fields
+
+`ObservableObject` [class fields](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Class_fields) are also observable:
+
+
+ ```js
+import { ObservableObject } from "can/everything";
+
+class MyType extends ObservableObject {
+  prop = "VALUE";
+}
+
+const myInstance = new MyType();
+
+myInstance.on( "prop", ( event, newVal, oldVal ) => {
+	console.log( newVal ); //-> "VALUE"
+	console.log( oldVal ); //-> "NEW VALUE"
+});
+
+myInstance.prop = "NEW VALUE";
+```
 
 ## Mixed-in type methods and properties
 

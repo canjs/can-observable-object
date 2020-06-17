@@ -8,8 +8,6 @@ const {
 	mixinTypeEvents
 } = require("can-observable-mixin");
 
-const inSetupSymbol = Symbol.for("can.initializing");
-
 
 let ObservableObject = class extends mixinProxy(Object) {
 	constructor(props) {

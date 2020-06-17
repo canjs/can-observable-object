@@ -8,6 +8,9 @@ const {
 	mixinTypeEvents
 } = require("can-observable-mixin");
 
+const inSetupSymbol = Symbol.for("can.initializing");
+
+
 let ObservableObject = class extends mixinProxy(Object) {
 	constructor(props) {
 		super();
@@ -21,18 +24,22 @@ let ObservableObject = class extends mixinProxy(Object) {
 				const props = target.constructor.props;
 				let value = descriptor.value;
 
-				if (!value && typeof descriptor.get === 'function') {
-					value = descriptor.get();
-				}
-
-				if (value) {
-					if (props && props[prop]) {
-						obj[prop] = value;
+				if (target.constructor.propertyDefaults) {
+					if (value && prop !== '_instanceDefinitions') {
+						target.set(prop, value);
 						return true;
 					}
-					// Make the property observable
-					return mixins.expando(target, prop, value);
+					return Reflect.defineProperty(target, prop, descriptor);
 				}
+
+				// Don't overwrite static props
+				// that share the same name with a class field
+				if (props && props[prop]) {
+					obj[prop] = value;
+					return true;
+				}
+
+				return mixins.expando(target, prop, value);
 			}
 		});
 	}

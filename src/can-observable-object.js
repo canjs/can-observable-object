@@ -8,6 +8,7 @@ const {
 	mixinTypeEvents
 } = require("can-observable-mixin");
 
+
 let ObservableObject = class extends mixinProxy(Object) {
 	constructor(props) {
 		super();
@@ -21,18 +22,23 @@ let ObservableObject = class extends mixinProxy(Object) {
 				const props = target.constructor.props;
 				let value = descriptor.value;
 
-				if (!value && typeof descriptor.get === 'function') {
-					value = descriptor.get();
+				// do not create expando properties for special keys set by can-observable-mixin
+				if (prop === '_instanceDefinitions') {
+					return Reflect.defineProperty(target, prop, descriptor);
 				}
 
-				if (value) {
-					if (props && props[prop]) {
-						obj[prop] = value;
+				// do not create expando properties for properties that are described
+				// by `static props` or `static propertyDefaults`
+				if (props && props[prop] || target.constructor.propertyDefaults) {
+					if (value) {
+						target.set(prop, value);
 						return true;
 					}
-					// Make the property observable
-					return mixins.expando(target, prop, value);
+					return Reflect.defineProperty(target, prop, descriptor);
 				}
+
+				// create expandos to make all other properties observable
+				return mixins.expando(target, prop, value);
 			}
 		});
 	}

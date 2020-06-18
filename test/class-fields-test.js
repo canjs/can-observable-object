@@ -1,4 +1,5 @@
 const ObservableObject = require("../src/can-observable-object");
+const type = require('can-type');
 const QUnit = require("steal-qunit");
 
 QUnit.module('can-observable-object-class-fields');
@@ -57,27 +58,53 @@ QUnit.test('Class fields should not overwrite static props', function (assert) {
 	}
 });
 
-QUnit.test('handle descriptor getter', function(assert) {
-	const foo = new ObservableObject();
+QUnit.test('Expando properties set should work', function(assert) {
+	class Foo extends ObservableObject{}
+	const foo = new Foo();
+	foo.set("action", 10);
+	assert.equal(foo.action, 10);
+});
 
-	let _bar = "Hello";
-	Object.defineProperty(foo, "bar", {
-		get() {
-			return _bar;
-		},
-		set(val) {
-			_bar = val;
-		}
-	});
+QUnit.test('Coerced properties', function(assert) {
+	assert.expect(2);
+	class MyType extends ObservableObject {
+		static propertyDefaults = {
+			type: type.maybeConvert(String)
+		};
+	}
+
+	const vm = new MyType();
 	
-	assert.equal(foo.bar, 'Hello');
 
-	foo.on('greetings', function (ev, newVal, oldVal) {
-		assert.equal(oldVal, 'Hello', 'Old value is correct');
-		assert.equal(newVal, 'Hola', 'Value is updated');
-		assert.ok(ev, 'The class field is observable');
-		done();
+	vm.on("action", function(ev, newVal) {
+		assert.strictEqual(newVal, "10");
+		assert.ok(ev);
 	});
 
-	foo.bar = 'Hola';
+	vm.set("action", 10);
+
+});
+
+QUnit.test('Coerced properties for class fields', function(assert) {
+	assert.expect(3);
+
+	class MyType extends ObservableObject {
+		foo = 5;
+
+		static propertyDefaults = {
+			type: type.maybeConvert(String)
+		};
+	}
+
+	const vm = new MyType();
+
+	assert.strictEqual(vm.foo, "5");
+
+	vm.on("foo", function(ev, newVal) {
+		assert.strictEqual(newVal, "10");
+		assert.ok(ev);
+	});
+
+	vm.set("foo", 10);
+
 });

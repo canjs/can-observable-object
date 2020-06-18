@@ -22,21 +22,22 @@ let ObservableObject = class extends mixinProxy(Object) {
 				const props = target.constructor.props;
 				let value = descriptor.value;
 
-				if (target.constructor.propertyDefaults) {
-					if (value && prop !== '_instanceDefinitions') {
+				// do not create expando properties for special keys set by can-observable-mixin
+				if (prop === '_instanceDefinitions') {
+					return Reflect.defineProperty(target, prop, descriptor);
+				}
+
+				// do not create expando properties for properties that are described
+				// by `static props` or `static propertyDefaults`
+				if (props && props[prop] || target.constructor.propertyDefaults) {
+					if (value) {
 						target.set(prop, value);
 						return true;
 					}
 					return Reflect.defineProperty(target, prop, descriptor);
 				}
 
-				// Don't overwrite static props
-				// that share the same name with a class field
-				if (props && props[prop]) {
-					obj[prop] = value;
-					return true;
-				}
-
+				// create expandos to make all other properties observable
 				return mixins.expando(target, prop, value);
 			}
 		});

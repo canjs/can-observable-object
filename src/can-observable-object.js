@@ -14,10 +14,10 @@ let ObservableObject = class extends mixinProxy(Object) {
 		super();
 		mixins.finalizeClass(this.constructor);
 		mixins.initialize(this, props);
-		const obj = this;
+		
 		// Define class fields observables 
 		//and return the proxy
-		return new Proxy(this, {
+		const proxiedInstance =  new Proxy(this, {
 			defineProperty(target, prop, descriptor) {
 				const props = target.constructor.props;
 				let value = descriptor.value;
@@ -27,20 +27,27 @@ let ObservableObject = class extends mixinProxy(Object) {
 					return Reflect.defineProperty(target, prop, descriptor);
 				}
 
-				// do not create expando properties for properties that are described
-				// by `static props` or `static propertyDefaults`
-				if (props && props[prop] || target.constructor.propertyDefaults) {
-					if (value) {
+				if (value) {
+					// do not create expando properties for properties that are described
+					// by `static props` or `static propertyDefaults`
+					if (props && props[prop] || target.constructor.propertyDefaults) {
 						target.set(prop, value);
 						return true;
 					}
-					return Reflect.defineProperty(target, prop, descriptor);
+					// create expandos to make all other properties observable
+					return mixins.expando(target, prop, value);
 				}
 
-				// create expandos to make all other properties observable
-				return mixins.expando(target, prop, value);
+				// Prevent dispatching more than one event with canReflect.setKeyValue
+				return Reflect.defineProperty(target, prop, descriptor);
 			}
 		});
+
+		// Adding the instance to observable-mixin 
+		// prevents additional event dispatching 
+		// https://github.com/canjs/can-observable-object/issues/35
+		this.constructor.instances.add(proxiedInstance);
+		return proxiedInstance;
 	}
 
 };

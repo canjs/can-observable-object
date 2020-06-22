@@ -1,6 +1,7 @@
 const ObservableObject = require("../src/can-observable-object");
 const type = require('can-type');
 const QUnit = require("steal-qunit");
+const canReflect = require('can-reflect');
 
 QUnit.module('can-observable-object-class-fields');
 
@@ -107,4 +108,31 @@ QUnit.test('Coerced properties for class fields', function(assert) {
 
 	vm.set("foo", 10);
 
+});
+
+QUnit.test('setKeyValue should event should be dispatched once', function(assert) {
+	assert.expect(1);
+
+	const done = assert.async();
+
+	class MyType extends ObservableObject {
+	}
+
+	const myType = new MyType();
+
+	canReflect.onKeyValue(myType, 'foo', (newVal) => {
+		assert.equal(newVal, 4);
+		done();
+	});
+
+	canReflect.setKeyValue(myType, 'foo', 4);
+});
+
+QUnit.test('observable mixin instances should have the proxied instance', function(assert) {
+	class MyType extends ObservableObject {
+	}
+
+	const myType = new MyType();
+
+	assert.ok(MyType.instances.has(myType));
 });

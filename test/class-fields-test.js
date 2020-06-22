@@ -134,5 +134,5 @@ QUnit.test('observable mixin instances should have the proxied instance', functi
 
 	const myType = new MyType();
 
-	assert.ok(myType.constructor.instances.has(myType));
+	assert.ok(MyType.instances.has(myType));
 });

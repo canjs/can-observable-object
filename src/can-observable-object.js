@@ -23,7 +23,8 @@ let ObservableObject = class extends mixinProxy(Object) {
 				let value = descriptor.value;
 
 				// do not create expando properties for special keys set by can-observable-mixin
-				if (prop === '_instanceDefinitions') {
+				const specialKeys = ['_instanceDefinitions', '_data', '_computed'];
+				if (specialKeys.indexOf(prop) >= 0) {
 					return Reflect.defineProperty(target, prop, descriptor);
 				}
 

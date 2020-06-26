@@ -136,3 +136,11 @@ QUnit.test('observable mixin instances should have the proxied instance', functi
 
 	assert.ok(MyType.instances.has(myType));
 });
+
+// if(process.env.NODE_ENV === 'production') {
+// 	QUnit.test("Do not create expando properties for special keys set by can-observable-mixin", function(assert) {
+// 		let obj = new ObservableObject();
+// 		assert.ok(canReflect.getKeyValue(obj, '_data'));
+// 		assert.ok(canReflect.getKeyValue(obj, '_computed'));
+// 	});
+// }

@@ -2,6 +2,7 @@ const ObservableObject = require("../src/can-observable-object");
 const type = require('can-type');
 const QUnit = require("steal-qunit");
 const canReflect = require('can-reflect');
+const clone = require('steal-clone');
 
 QUnit.module('can-observable-object-class-fields');
 
@@ -135,4 +136,24 @@ QUnit.test('observable mixin instances should have the proxied instance', functi
 	const myType = new MyType();
 
 	assert.ok(MyType.instances.has(myType));
+});
+
+
+QUnit.test('_data and _computed can be read in production mode', function(assert) {
+	const done = assert.async();
+	const oldEnv = window.process.env.NODE_ENV;
+	window.process.env.NODE_ENV = 'production';
+	clone()
+		.import("can-observable-object")
+		.then((ObservableObject) => {
+			class MyClass extends ObservableObject {
+				static props = {
+					foo: String
+				}
+			}
+			const obj = new MyClass();
+			assert.ok(obj._data);
+			window.process.env.NODE_ENV = oldEnv;
+			done();
+		});
 });

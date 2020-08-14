@@ -88,8 +88,8 @@ class MyType extends ObservableObject {
 const myInstance = new MyType( {prop: "VALUE"} );
 
 myInstance.on( "prop", ( event, newVal, oldVal ) => {
-	console.log( newVal ); //-> "VALUE"
-	console.log( oldVal ); //-> "NEW VALUE"
+	console.log( newVal ); //-> "NEW VALUE"
+	console.log( oldVal ); //-> "VALUE"
 } );
 
 myInstance.prop = "NEW VALUE";
